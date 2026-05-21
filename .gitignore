@@ -24,6 +24,8 @@
 .DS_Store
 *.pem
 /work/tmp/
+work/plans/*.xlsx
+work/plans/~$*
 
 # debug
 npm-debug.log*
