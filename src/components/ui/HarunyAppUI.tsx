@@ -34,8 +34,8 @@ export function AssetImage({
 
 export function AppFrame({ children }: { children: ReactNode }) {
   return (
-    <main className="min-h-dvh bg-[var(--background)] px-6 py-7">
-      <div className="mx-auto flex min-h-[calc(100dvh-56px)] w-full max-w-[430px] flex-col gap-[22px]">
+    <main className="min-h-dvh bg-[var(--background)] px-4 py-5">
+      <div className="mx-auto flex min-h-[calc(100dvh-40px)] w-full max-w-[430px] flex-col gap-[18px]">
         {children}
       </div>
     </main>
@@ -112,7 +112,7 @@ export function PrimaryActionButton({
 }) {
   return (
     <button
-      className="flex min-h-[104px] items-center justify-center gap-3 rounded-[22px] bg-[var(--action)] px-4 text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)] min-[420px]:min-h-[112px]"
+      className="flex min-h-[104px] items-center justify-center gap-2 rounded-[22px] bg-[var(--action)] px-3 text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)] min-[420px]:min-h-[112px] min-[420px]:gap-3 min-[420px]:px-4"
       onClick={onClick}
       type="button"
     >
@@ -131,7 +131,7 @@ export function SecondaryActionButton({
 }) {
   return (
     <button
-      className="flex min-h-[104px] items-center justify-center gap-3 rounded-[22px] bg-[#eefafa] px-4 text-[var(--rest)] shadow-sm ring-1 ring-[#d3eceb] min-[420px]:min-h-[112px]"
+      className="flex min-h-[104px] items-center justify-center gap-2 rounded-[22px] bg-[#eefafa] px-3 text-[var(--rest)] shadow-sm ring-1 ring-[#d3eceb] min-[420px]:min-h-[112px] min-[420px]:gap-3 min-[420px]:px-4"
       type="button"
     >
       {icon}
@@ -149,10 +149,10 @@ export function ButtonText({
 }) {
   return (
     <>
-      <span className="block whitespace-nowrap text-[21px] font-black leading-tight min-[420px]:text-[25px]">
+      <span className="block whitespace-nowrap text-[19px] font-black leading-tight min-[420px]:text-[22px]">
         {title}
       </span>
-      <span className="mt-2 block text-[13px] font-semibold leading-5 opacity-90 min-[420px]:text-[14px]">{body}</span>
+      <span className="mt-2 block text-[12px] font-semibold leading-5 opacity-90 min-[420px]:text-[13px]">{body}</span>
     </>
   );
 }

@@ -135,6 +135,10 @@ public/
 - [x] `common/star-optional`
 - [x] `common/english-book`
 - [x] `common/settings`
+- [x] `student-studying/student-face-crop.png` - 시안 PNG에서 crop
+- [x] `student-studying/math-notebook-crop.png` - 시안 PNG에서 crop
+- [x] `student-studying/english-book-crop.png` - 시안 PNG에서 crop
+- [x] `student-studying/star-crop.png` - 시안 PNG에서 crop
 
 ### 03 완료 모달
 
