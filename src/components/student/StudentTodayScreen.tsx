@@ -215,9 +215,12 @@ function TodayView({
 
       <SummaryMetricCard className="flex min-h-[86px] items-center justify-between px-6 py-5">
         <div className="flex min-w-0 items-center gap-4">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-[#257d34] text-[#257d34]">
-            <span className="h-4 w-7 -rotate-45 border-b-[4px] border-l-[4px] border-current" />
-          </span>
+          <AssetImage
+            className="shrink-0"
+            height={52}
+            src="/assets/haruny/common/check-circle.svg"
+            width={52}
+          />
           <div className="min-w-0">
             <p className="text-[22px] font-black text-[#22742e]">회복 가능</p>
             <p className="mt-1 text-[16px] font-medium leading-6 text-[#696f75] min-[420px]:text-[17px]">
@@ -256,13 +259,13 @@ function TodayView({
         <p className="text-[21px] font-black text-[#282828]">남은 시간</p>
         <div className="border-r border-[#e5e5e5] px-4 text-center">
           <p className="text-[14px] font-semibold text-[#747474]">공부할 시간</p>
-          <p className="mt-1 text-[27px] font-black leading-tight text-accent min-[420px]:text-[30px]">
+          <p className="mt-1 whitespace-nowrap text-[22px] font-black leading-tight text-accent min-[420px]:text-[26px]">
             {formatMinutes(remainingStudyMinutes)}
           </p>
         </div>
         <div className="pl-4 text-center">
           <p className="text-[14px] font-semibold text-[#747474]">여유 시간</p>
-          <p className="mt-1 text-[27px] font-black leading-tight text-accent min-[420px]:text-[30px]">
+          <p className="mt-1 whitespace-nowrap text-[22px] font-black leading-tight text-accent min-[420px]:text-[26px]">
             {formatMinutes(spareMinutes)}
           </p>
         </div>
@@ -483,7 +486,7 @@ function MissionSummary({
     <div className="flex min-h-[82px] items-center justify-center gap-3 border-r border-[#e8e8e8] px-4 last:border-r-0">
       {icon}
       <div>
-        <p className="text-[17px] font-bold text-[#252525] min-[420px]:text-[19px]">{label}</p>
+        <p className="whitespace-nowrap text-[16px] font-bold text-[#252525] min-[420px]:text-[18px]">{label}</p>
         <p className="mt-1 text-[16px] font-semibold text-[#777] min-[420px]:text-[18px]">{value}</p>
       </div>
     </div>

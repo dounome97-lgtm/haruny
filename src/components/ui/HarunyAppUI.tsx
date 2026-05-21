@@ -149,7 +149,7 @@ export function ButtonText({
 }) {
   return (
     <>
-      <span className="block text-[21px] font-black leading-tight min-[420px]:text-[25px]">
+      <span className="block whitespace-nowrap text-[21px] font-black leading-tight min-[420px]:text-[25px]">
         {title}
       </span>
       <span className="mt-2 block text-[13px] font-semibold leading-5 opacity-90 min-[420px]:text-[14px]">{body}</span>
