@@ -34,7 +34,7 @@ export function AssetImage({
 
 export function AppFrame({ children }: { children: ReactNode }) {
   return (
-    <main className="min-h-dvh bg-[var(--background)] px-5 py-7 min-[420px]:px-6">
+    <main className="min-h-dvh bg-[var(--background)] px-6 py-7">
       <div className="mx-auto flex min-h-[calc(100dvh-56px)] w-full max-w-[430px] flex-col gap-[22px]">
         {children}
       </div>
@@ -88,12 +88,12 @@ export function HeroMessageCard({
   title: string;
 }) {
   return (
-    <section className="relative min-h-[128px] overflow-hidden rounded-[24px] bg-[var(--surface-soft)] px-6 py-6 shadow-sm ring-1 ring-[#dfeadc]">
-      <div className="relative z-10 flex max-w-[72%] items-center gap-4">
+    <section className="relative min-h-[128px] overflow-hidden rounded-[24px] bg-[var(--surface-soft)] px-5 py-5 shadow-sm ring-1 ring-[#dfeadc] min-[420px]:px-6 min-[420px]:py-6">
+      <div className="relative z-10 flex max-w-[68%] items-center gap-3 min-[420px]:gap-4">
         {icon}
         <div>
-          <h2 className="text-[26px] font-black leading-tight text-accent">{title}</h2>
-          <p className="mt-3 text-[21px] font-medium leading-8 text-[#27313b]">{body}</p>
+          <h2 className="text-[20px] font-black leading-tight text-accent min-[420px]:text-[24px]">{title}</h2>
+          <p className="mt-2 text-[15px] font-medium leading-6 text-[#27313b] min-[420px]:text-[18px] min-[420px]:leading-7">{body}</p>
         </div>
       </div>
       {illustration ? <div className="absolute bottom-0 right-3">{illustration}</div> : null}
@@ -112,7 +112,7 @@ export function PrimaryActionButton({
 }) {
   return (
     <button
-      className="flex min-h-[112px] items-center justify-center gap-3 rounded-[22px] bg-[var(--action)] px-3 text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)] min-[420px]:gap-4 min-[420px]:px-4"
+      className="flex min-h-[104px] items-center justify-center gap-3 rounded-[22px] bg-[var(--action)] px-4 text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)] min-[420px]:min-h-[112px]"
       onClick={onClick}
       type="button"
     >
@@ -131,7 +131,7 @@ export function SecondaryActionButton({
 }) {
   return (
     <button
-      className="flex min-h-[112px] items-center justify-center gap-3 rounded-[22px] bg-[#eefafa] px-3 text-[var(--rest)] shadow-sm ring-1 ring-[#d3eceb] min-[420px]:gap-4 min-[420px]:px-4"
+      className="flex min-h-[104px] items-center justify-center gap-3 rounded-[22px] bg-[#eefafa] px-4 text-[var(--rest)] shadow-sm ring-1 ring-[#d3eceb] min-[420px]:min-h-[112px]"
       type="button"
     >
       {icon}
@@ -149,10 +149,10 @@ export function ButtonText({
 }) {
   return (
     <>
-      <span className="block text-[24px] font-black leading-tight min-[420px]:text-[28px]">
+      <span className="block text-[21px] font-black leading-tight min-[420px]:text-[25px]">
         {title}
       </span>
-      <span className="mt-2 block text-base font-semibold opacity-90">{body}</span>
+      <span className="mt-2 block text-[13px] font-semibold leading-5 opacity-90 min-[420px]:text-[14px]">{body}</span>
     </>
   );
 }

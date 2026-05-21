@@ -165,10 +165,10 @@ function TodayView({
         illustration={
           <AssetImage
             className="translate-x-2"
-            height={128}
+            height={104}
             priority
             src="/assets/haruny/student-today/white-mascot-cup.svg"
-            width={154}
+            width={128}
           />
         }
         title={allRequiredDone ? "잘 끝냈어!" : "잘하고 있어!"}
@@ -176,19 +176,19 @@ function TodayView({
 
       <section>
         <h2 className="mb-4 text-[25px] font-extrabold text-[#333]">다음 미션</h2>
-        <div className="flex min-h-[142px] items-center gap-4 rounded-[22px] border border-[#cfe3c8] bg-white px-5 py-6 shadow-sm">
+        <div className="flex min-h-[136px] items-center gap-5 rounded-[22px] border border-[#cfe3c8] bg-white px-7 py-6 shadow-sm">
           <AssetImage
             className="shrink-0"
-            height={96}
+            height={86}
             priority
             src="/assets/haruny/common/math-notebook.svg"
-            width={96}
+            width={86}
           />
           <div className="min-w-0">
-            <h3 className="text-[32px] font-black leading-tight text-[#232323] min-[420px]:text-[36px]">
+            <h3 className="whitespace-nowrap text-[26px] font-black leading-tight text-[#232323] min-[420px]:text-[32px]">
               지금 {nextTask.subject} {nextTask.estimatedMinutes}분
             </h3>
-            <p className="mt-3 text-[22px] font-semibold leading-8 text-[#777]">
+            <p className="mt-3 text-[18px] font-semibold leading-7 text-[#777] min-[420px]:text-[20px]">
               {nextTask.title.replace(`${nextTask.subject} `, "")}
             </p>
           </div>
@@ -199,33 +199,33 @@ function TodayView({
         <PrimaryActionButton
           onClick={() => onStart(nextTask.id)}
           icon={
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[var(--action)] min-[420px]:h-14 min-[420px]:w-14">
-              <span className="ml-1 h-0 w-0 border-y-[11px] border-l-[17px] border-y-transparent border-l-current" />
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[var(--action)]">
+              <span className="ml-1 h-0 w-0 border-y-[10px] border-l-[16px] border-y-transparent border-l-current" />
             </span>
           }
         >
           <ButtonText body="지금 바로 집중 모드" title="바로 시작" />
         </PrimaryActionButton>
         <SecondaryActionButton
-          icon={<AssetImage height={58} src="/assets/haruny/common/cup.svg" width={58} />}
+          icon={<AssetImage height={52} src="/assets/haruny/common/cup.svg" width={52} />}
         >
           <ButtonText body="짧게 쉬고 다시 시작" title="10분 쉬기" />
         </SecondaryActionButton>
       </section>
 
-      <SummaryMetricCard className="flex min-h-[76px] items-center justify-between px-5 py-4">
-        <div className="flex items-center gap-4">
+      <SummaryMetricCard className="flex min-h-[86px] items-center justify-between px-6 py-5">
+        <div className="flex min-w-0 items-center gap-4">
           <span className="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-[#257d34] text-[#257d34]">
             <span className="h-4 w-7 -rotate-45 border-b-[4px] border-l-[4px] border-current" />
           </span>
-          <div>
-            <p className="text-[24px] font-black text-[#22742e]">회복 가능</p>
-            <p className="mt-1 text-[19px] font-medium leading-7 text-[#696f75]">
+          <div className="min-w-0">
+            <p className="text-[22px] font-black text-[#22742e]">회복 가능</p>
+            <p className="mt-1 text-[16px] font-medium leading-6 text-[#696f75] min-[420px]:text-[17px]">
               지금 시작하면 오늘 계획을 마칠 수 있어요!
             </p>
           </div>
         </div>
-        <AssetImage height={58} src="/assets/haruny/common/sun.svg" width={58} />
+        <AssetImage className="shrink-0" height={50} src="/assets/haruny/common/sun.svg" width={50} />
       </SummaryMetricCard>
 
       <section>
@@ -252,31 +252,31 @@ function TodayView({
         </SummaryMetricCard>
       </section>
 
-      <SummaryMetricCard className="grid min-h-[88px] grid-cols-[1fr_1.15fr_1fr] items-center px-5 py-4">
-        <p className="text-[23px] font-black text-[#282828]">남은 시간</p>
-        <div className="border-r border-[#e5e5e5] pr-5 text-center">
-          <p className="text-base font-semibold text-[#747474]">공부할 시간</p>
-          <p className="mt-1 text-[34px] font-black leading-none text-accent">
+      <SummaryMetricCard className="grid min-h-[88px] grid-cols-[1fr_1.2fr_1fr] items-center px-6 py-5">
+        <p className="text-[21px] font-black text-[#282828]">남은 시간</p>
+        <div className="border-r border-[#e5e5e5] px-4 text-center">
+          <p className="text-[14px] font-semibold text-[#747474]">공부할 시간</p>
+          <p className="mt-1 text-[27px] font-black leading-tight text-accent min-[420px]:text-[30px]">
             {formatMinutes(remainingStudyMinutes)}
           </p>
         </div>
-        <div className="pl-5 text-center">
-          <p className="text-base font-semibold text-[#747474]">여유 시간</p>
-          <p className="mt-1 text-[34px] font-black leading-none text-accent">
+        <div className="pl-4 text-center">
+          <p className="text-[14px] font-semibold text-[#747474]">여유 시간</p>
+          <p className="mt-1 text-[27px] font-black leading-tight text-accent min-[420px]:text-[30px]">
             {formatMinutes(spareMinutes)}
           </p>
         </div>
       </SummaryMetricCard>
 
       <Link
-        className="mb-2 flex min-h-[80px] items-center justify-between rounded-[22px] bg-white px-5 py-4 shadow-sm ring-1 ring-black/10"
+        className="mb-2 flex min-h-[82px] items-center justify-between rounded-[22px] bg-white px-6 py-4 shadow-sm ring-1 ring-black/10"
         href="/student/week"
       >
         <div className="flex items-center gap-4">
-          <AssetImage height={54} src="/assets/haruny/common/calendar.svg" width={54} />
+          <AssetImage height={50} src="/assets/haruny/common/calendar.svg" width={50} />
           <div>
-            <p className="text-lg font-semibold text-[#555]">다음 일정</p>
-            <p className="mt-1 text-[24px] font-bold text-[#242424]">
+            <p className="text-[16px] font-semibold text-[#555]">다음 일정</p>
+            <p className="mt-1 text-[20px] font-bold text-[#242424] min-[420px]:text-[22px]">
               {today.timeBlocks[0].startAt} {today.timeBlocks[0].title}
             </p>
           </div>
@@ -480,11 +480,11 @@ function MissionSummary({
   value: string;
 }) {
   return (
-    <div className="flex min-h-[76px] items-center justify-center gap-3 border-r border-[#e8e8e8] px-3 last:border-r-0">
+    <div className="flex min-h-[82px] items-center justify-center gap-3 border-r border-[#e8e8e8] px-4 last:border-r-0">
       {icon}
       <div>
-        <p className="text-[20px] font-bold text-[#252525]">{label}</p>
-        <p className="mt-1 text-[20px] font-semibold text-[#777]">{value}</p>
+        <p className="text-[17px] font-bold text-[#252525] min-[420px]:text-[19px]">{label}</p>
+        <p className="mt-1 text-[16px] font-semibold text-[#777] min-[420px]:text-[18px]">{value}</p>
       </div>
     </div>
   );
