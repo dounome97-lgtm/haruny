@@ -127,14 +127,14 @@ public/
 
 ### 02 학생 공부 중
 
-- `common/student-face`
-- `common/math-notebook`
-- `common/clock`
-- `common/check-action`
-- `common/pause`
-- `common/star-optional`
-- `common/english-book`
-- `common/settings`
+- [x] `common/student-face`
+- [x] `common/math-notebook`
+- [x] `common/clock`
+- [x] `common/check-action`
+- [x] `common/pause`
+- [x] `common/star-optional`
+- [x] `common/english-book`
+- [x] `common/settings`
 
 ### 03 완료 모달
 

@@ -303,29 +303,29 @@ function StudyingView({
     <>
       <StudyTopBar onPause={onPause} />
 
-      <section className="flex items-center gap-4">
+      <section className="flex items-center gap-3 min-[420px]:gap-4">
         <StudentAvatar />
-        <div className="relative flex-1 rounded-[28px] bg-[#eef6e8] px-6 py-5 shadow-sm ring-1 ring-[#dfeadc] before:absolute before:left-[-14px] before:top-9 before:h-0 before:w-0 before:border-y-[13px] before:border-r-[16px] before:border-y-transparent before:border-r-[#eef6e8]">
-          <h2 className="text-[30px] font-black leading-tight text-accent">
+        <div className="relative min-w-0 flex-1 rounded-[26px] bg-[#eef6e8] px-5 py-5 shadow-sm ring-1 ring-[#dfeadc] before:absolute before:left-[-12px] before:top-10 before:h-0 before:w-0 before:border-y-[12px] before:border-r-[14px] before:border-y-transparent before:border-r-[#eef6e8] min-[420px]:rounded-[28px] min-[420px]:px-6">
+          <h2 className="whitespace-nowrap text-[27px] font-black leading-tight text-accent min-[420px]:text-[30px]">
             잘하고 있어요!
           </h2>
-          <p className="mt-4 text-[22px] font-medium leading-8 text-[#1f2b36]">
+          <p className="mt-4 text-[18px] font-medium leading-7 text-[#1f2b36] min-[420px]:text-[22px] min-[420px]:leading-8">
             지금 흐름 좋아요.
             <br />
             집중한 시간이 쌓이고 있어요.
           </p>
-          <span className="absolute bottom-6 right-7 text-3xl text-[#65b36a]">♥</span>
+          <span className="absolute bottom-5 right-6 text-2xl text-[#65b36a] min-[420px]:bottom-6 min-[420px]:right-7 min-[420px]:text-3xl">♥</span>
         </div>
       </section>
 
-      <section className="min-h-[230px] rounded-[28px] bg-white px-6 py-6 shadow-[0_10px_30px_rgba(20,34,49,0.08)] ring-1 ring-black/5">
-        <span className="inline-flex rounded-full bg-[#edf8ea] px-5 py-2 text-[22px] font-black text-accent ring-1 ring-[#d8ead2]">
+      <section className="min-h-[230px] rounded-[28px] bg-white px-6 py-6 shadow-[0_10px_30px_rgba(20,34,49,0.08)] ring-1 ring-black/5 min-[420px]:min-h-[248px]">
+        <span className="inline-flex whitespace-nowrap rounded-full bg-[#edf8ea] px-5 py-2 text-[20px] font-black text-accent ring-1 ring-[#d8ead2] min-[420px]:text-[22px]">
           현재 미션
         </span>
-        <h1 className="mt-8 text-[46px] font-black leading-tight text-[#1f2b36]">
+        <h1 className="mt-7 whitespace-nowrap text-[44px] font-black leading-tight text-[#1f2b36] min-[420px]:mt-8 min-[420px]:text-[52px]">
           {task.subject} 오답
         </h1>
-        <p className="mt-4 text-[27px] font-semibold leading-9 text-[#6e7780]">
+        <p className="mt-4 whitespace-nowrap text-[26px] font-semibold leading-9 text-[#6e7780] min-[420px]:text-[30px]">
           {task.title.replace(`${task.subject} `, "")}
         </p>
         <div className="mt-8">
@@ -336,49 +336,54 @@ function StudyingView({
       <section className="rounded-[28px] bg-[#eef6ec] px-6 py-6 text-center shadow-sm ring-1 ring-[#dfeadc]">
         <div className="flex items-center justify-center gap-3 text-accent">
           <ClockIcon />
-          <p className="text-[28px] font-black">남은 시간</p>
+          <p className="whitespace-nowrap text-[26px] font-black min-[420px]:text-[28px]">남은 시간</p>
         </div>
-        <p className="mt-5 text-[82px] font-black leading-none text-accent">
+        <p className="mt-5 whitespace-nowrap text-[76px] font-black leading-none text-accent min-[420px]:text-[82px]">
           {formatTimerMinutes(Math.max(task.estimatedMinutes - 8, 1))}
         </p>
         <div className="mx-auto mt-8 h-4 w-[88%] overflow-hidden rounded-full bg-[#dfe5df]">
           <div className="h-full w-[68%] rounded-full bg-[#59b96a]" />
         </div>
-        <p className="mt-4 text-[22px] font-semibold text-[#6d747b]">
+        <p className="mt-4 whitespace-nowrap text-[21px] font-semibold text-[#6d747b] min-[420px]:text-[22px]">
           총 {task.estimatedMinutes}분
         </p>
       </section>
 
-      <section className="grid grid-cols-2 gap-4">
+      <section className="grid grid-cols-2 gap-3 min-[420px]:gap-4">
         <button
-          className="flex min-h-[98px] items-center justify-center gap-4 rounded-[22px] bg-[#ff5a4f] px-4 text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)]"
+          className="flex min-h-[86px] items-center justify-center gap-2 rounded-[22px] bg-[#ff5a4f] px-2 text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)] min-[420px]:min-h-[98px] min-[420px]:gap-4 min-[420px]:px-4"
           onClick={onComplete}
           type="button"
         >
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[#ff5a4f]">
-            <span className="h-4 w-7 -rotate-45 border-b-[5px] border-l-[5px] border-current" />
-          </span>
-          <span className="text-[28px] font-black">끝냈어요</span>
+          <AssetImage
+            className="h-10 w-10 shrink-0 min-[420px]:h-14 min-[420px]:w-14"
+            height={56}
+            src="/assets/haruny/common/check-action.svg"
+            width={56}
+          />
+          <span className="whitespace-nowrap text-[20px] font-black min-[420px]:text-[28px]">끝냈어요</span>
         </button>
         <button
-          className="flex min-h-[98px] items-center justify-center gap-4 rounded-[22px] bg-[#eefafa] px-4 text-[#149e9a] shadow-sm ring-1 ring-[#d3eceb]"
+          className="flex min-h-[86px] items-center justify-center gap-2 rounded-[22px] bg-[#eefafa] px-2 text-[#149e9a] shadow-sm ring-1 ring-[#d3eceb] min-[420px]:min-h-[98px] min-[420px]:gap-4 min-[420px]:px-4"
           onClick={onPause}
           type="button"
         >
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[#149e9a]">
-            <span className="h-7 w-2 rounded-full bg-current" />
-            <span className="ml-2 h-7 w-2 rounded-full bg-current" />
-          </span>
-          <span className="text-[28px] font-black">잠깐 멈춤</span>
+          <AssetImage
+            className="h-10 w-10 shrink-0 min-[420px]:h-14 min-[420px]:w-14"
+            height={56}
+            src="/assets/haruny/common/pause.svg"
+            width={56}
+          />
+          <span className="whitespace-nowrap text-[20px] font-black min-[420px]:text-[28px]">잠깐 멈춤</span>
         </button>
       </section>
 
-      <section className="mb-2 flex min-h-[92px] items-center justify-between rounded-[24px] border border-[#f4d88c] bg-[#fffdf5] px-6 py-5 shadow-sm">
-        <div className="flex items-center gap-4">
+      <section className="mb-2 flex min-h-[92px] items-center justify-between gap-3 rounded-[24px] border border-[#f4d88c] bg-[#fffdf5] px-5 py-5 shadow-sm min-[420px]:gap-4 min-[420px]:px-6">
+        <div className="flex min-w-0 items-center gap-3 min-[420px]:gap-4">
           <StarIcon />
-          <div>
-            <p className="text-[22px] font-black text-accent">다음 행동 미리보기</p>
-            <p className="mt-2 text-[28px] font-black leading-tight text-[#1f2b36]">
+          <div className="min-w-0">
+            <p className="whitespace-nowrap text-[18px] font-black text-accent min-[420px]:text-[22px]">다음 행동 미리보기</p>
+            <p className="mt-2 whitespace-nowrap text-[25px] font-black leading-tight text-[#1f2b36] min-[420px]:text-[28px]">
               끝나면 영어 단어
             </p>
           </div>
@@ -447,13 +452,13 @@ function StudyTopBar({ onPause }: { onPause: () => void }) {
       >
         <span className="h-5 w-5 -rotate-45 border-l-[4px] border-t-[4px] border-current" />
       </button>
-      <h1 className="text-[38px] font-black text-[#1f2b36]">공부 중</h1>
+      <h1 className="whitespace-nowrap text-[38px] font-black text-[#1f2b36]">공부 중</h1>
       <button
         aria-label="설정"
         className="flex h-11 w-11 items-center justify-center text-[#1f2b36]"
         type="button"
       >
-        <CogIcon />
+        <AssetImage height={42} src="/assets/haruny/common/settings.svg" width={42} />
       </button>
     </header>
   );
@@ -495,15 +500,13 @@ function MissionSummary({
 
 function StudentAvatar() {
   return (
-    <span className="relative h-[112px] w-[112px] shrink-0 overflow-hidden rounded-full bg-[#e6f3dc]" aria-hidden>
-      <span className="absolute left-[26px] top-[18px] h-16 w-16 rounded-full bg-[#ffc29b]" />
-      <span className="absolute left-[22px] top-[16px] h-8 w-20 -rotate-6 rounded-t-full bg-[#6b432a]" />
-      <span className="absolute left-[31px] top-[44px] h-2 w-2 rounded-full bg-[#1f2b36]" />
-      <span className="absolute right-[31px] top-[44px] h-2 w-2 rounded-full bg-[#1f2b36]" />
-      <span className="absolute left-[46px] top-[56px] h-2 w-5 rounded-b-full border-b-2 border-[#e96a4b]" />
-      <span className="absolute bottom-[-12px] left-[18px] h-16 w-20 rounded-t-[32px] bg-[#67a763]" />
-      <span className="absolute bottom-4 left-[42px] h-8 w-8 rounded-b-full bg-[#ffc29b]" />
-    </span>
+    <AssetImage
+      className="h-[96px] w-[96px] shrink-0 min-[420px]:h-[112px] min-[420px]:w-[112px]"
+      height={112}
+      priority
+      src="/assets/haruny/common/student-face.svg"
+      width={112}
+    />
   );
 }
 
@@ -565,62 +568,39 @@ function ChecklistIcon() {
 
 function ClockIcon() {
   return (
-    <span className="relative h-8 w-8 rounded-full border-[3px] border-current" aria-hidden>
-      <span className="absolute left-1/2 top-1/2 h-3 w-[3px] -translate-x-1/2 -translate-y-full rounded-full bg-current" />
-      <span className="absolute left-1/2 top-1/2 h-[3px] w-3 -translate-y-1/2 rounded-full bg-current" />
-    </span>
-  );
-}
-
-function CogIcon() {
-  return (
-    <span className="relative h-8 w-8 rounded-full border-[4px] border-current" aria-hidden>
-      {Array.from({ length: 8 }).map((_, index) => (
-        <span
-          className="absolute left-1/2 top-1/2 h-2 w-3 origin-left rounded-full bg-current"
-          key={index}
-          style={{ transform: `rotate(${index * 45}deg) translate(14px, -4px)` }}
-        />
-      ))}
-      <span className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current" />
-    </span>
+    <AssetImage className="h-8 w-8 shrink-0" height={32} src="/assets/haruny/common/clock.svg" width={32} />
   );
 }
 
 function NotebookIcon() {
   return (
-    <span className="relative h-20 w-20 shrink-0 min-[420px]:h-24 min-[420px]:w-24" aria-hidden>
-      <span className="absolute left-2 top-4 h-14 w-14 -rotate-6 rounded-lg bg-[#8bb76d] min-[420px]:h-16 min-[420px]:w-16" />
-      <span className="absolute left-5 top-1 h-16 w-14 -rotate-6 rounded-lg bg-[#f4f8e9] shadow-sm min-[420px]:h-20 min-[420px]:w-16" />
-      <span className="absolute left-3 top-4 grid h-14 content-around">
-        <span className="h-2 w-2 rounded-full bg-[#6b9854]" />
-        <span className="h-2 w-2 rounded-full bg-[#6b9854]" />
-        <span className="h-2 w-2 rounded-full bg-[#6b9854]" />
-      </span>
-      <span className="absolute left-8 top-6 text-base font-black text-[#87aa60] min-[420px]:left-9 min-[420px]:top-7 min-[420px]:text-lg">2×5=7</span>
-      <span className="absolute left-10 top-11 text-base font-black text-[#87aa60] min-[420px]:left-11 min-[420px]:top-12 min-[420px]:text-lg">x=?</span>
-      <span className="absolute right-1 top-9 h-14 w-3 rotate-[24deg] rounded-full bg-[#f2c14e] min-[420px]:top-10 min-[420px]:h-16 min-[420px]:w-4" />
-      <span className="absolute right-0 top-[62px] h-3 w-4 rotate-[24deg] bg-[#333] min-[420px]:top-[70px] min-[420px]:h-4 min-[420px]:w-5" />
-    </span>
+    <AssetImage
+      className="h-20 w-20 shrink-0 min-[420px]:h-24 min-[420px]:w-24"
+      height={96}
+      src="/assets/haruny/common/math-notebook.svg"
+      width={96}
+    />
   );
 }
 
 function StarIcon() {
   return (
-    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#fff0ca] text-[#f1bd2f]" aria-hidden>
-      <span className="text-3xl leading-none">★</span>
-    </span>
+    <AssetImage
+      className="h-12 w-12 shrink-0 min-[420px]:h-14 min-[420px]:w-14"
+      height={56}
+      src="/assets/haruny/common/star-optional.svg"
+      width={56}
+    />
   );
 }
 
 function SmallBookIcon() {
   return (
-    <span className="relative h-14 w-12 shrink-0" aria-hidden>
-      <span className="absolute inset-x-1 top-1 h-12 rounded-md bg-[#58b982]" />
-      <span className="absolute inset-x-2 top-0 h-12 rounded-md bg-[#6fc999] shadow-sm" />
-      <span className="absolute left-3 top-1 h-10 w-1 rounded-full bg-white/45" />
-      <span className="absolute right-4 top-3 text-2xl font-black text-white">A</span>
-      <span className="absolute bottom-0 left-2 h-2 w-8 rounded-b-md bg-[#e9f7ec]" />
-    </span>
+    <AssetImage
+      className="h-14 w-14 shrink-0 min-[420px]:h-16 min-[420px]:w-16"
+      height={64}
+      src="/assets/haruny/common/english-book.svg"
+      width={64}
+    />
   );
 }

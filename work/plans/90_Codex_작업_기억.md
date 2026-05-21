@@ -32,8 +32,8 @@
 - 확정 시안 PNG만으로 CSS 재현을 진행한 결과 시각 품질이 떨어져, Figma형 디자인 스펙과 asset 기반 재구현으로 방향을 수정했다.
 - 디자인 기준 문서: `work/design/00_figma_like_design_spec.md`
 - asset/재구현 계획 문서: `work/design/01_asset_and_rebuild_plan.md`
-- `public/assets/haruny` asset 폴더와 학생 `오늘` 화면용 1차 SVG asset을 생성했다.
-- 학생 `오늘` 화면은 공통 UI 컴포넌트와 asset 기반으로 1차 재구현했다.
+- `public/assets/haruny` asset 폴더와 학생 `오늘`/`공부 중` 화면용 1차 SVG asset을 생성했다.
+- 학생 `오늘` 화면과 `공부 중` 화면은 공통 UI 컴포넌트와 asset 기반으로 1차 재구현했다.
 - 로컬 개발 서버는 `npm run dev -- --hostname 127.0.0.1 --port 3000` 방식으로 실행 가능하다.
 
 ## 구현된 큰 범위
@@ -48,7 +48,6 @@
 
 ## 다음 후보 작업
 
-- 학생 `공부 중` 화면용 asset 확정 및 asset 기반 재구현.
 - 학생 완료 모달용 asset 확정 및 asset 기반 재구현.
 - 학생 `하루 마감` 화면용 asset 확정 및 asset 기반 재구현.
 - 재구현 후 Vercel preview 배포로 실제 휴대폰에서 주요 화면 점검.
