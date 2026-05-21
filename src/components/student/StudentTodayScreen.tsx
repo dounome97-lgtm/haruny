@@ -375,26 +375,39 @@ function CompletionModal({
   requiredLeft: number;
   summary: CompletionSummary;
 }) {
+  const remainingRequiredText =
+    requiredLeft > 0 ? `필수 미션 ${requiredLeft}개 남음` : "필수 미션 완료";
+
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center bg-slate-950/45 px-6">
-      <section className="w-full max-w-[360px] rounded-[32px] bg-white p-6 text-center shadow-2xl">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#eef7f0] text-3xl font-black text-accent">
-          ✓
-        </div>
-        <h2 className="mt-5 text-2xl font-bold text-foreground">
-          좋아요. {summary.taskTitle} 끝!
+    <div className="fixed inset-0 z-20 flex items-center justify-center bg-black/55 px-5 py-8 backdrop-blur-[2px]">
+      <section className="w-full max-w-[360px] rounded-[30px] bg-white px-7 py-8 text-center shadow-2xl min-[420px]:max-w-[390px] min-[420px]:rounded-[34px] min-[420px]:px-8">
+        <SuccessGarden />
+        <h2 className="mt-7 text-[30px] font-black leading-tight text-accent min-[420px]:text-[34px]">
+          좋아요, 하나 끝냈어요
         </h2>
-        <p className="mt-3 text-base leading-7 text-muted">
-          {summary.durationMinutes}분 집중했어요. 남은 필수 미션은{" "}
-          {requiredLeft}개예요.
-        </p>
+        <div className="mt-6 rounded-[20px] bg-[#f3f8f0] px-5 py-5">
+          <p className="text-[21px] font-semibold leading-9 text-[#1f2b36]">
+            {summary.taskTitle}을 마쳤어요.
+            <br />
+            잠깐 숨 돌리고 오늘 화면에서
+            <br />
+            다음 흐름을 이어가면 돼요.
+          </p>
+        </div>
+        <div className="mt-6 grid grid-cols-2 border-y border-[#e4e4e4] py-4">
+          <CompletionMetric icon={<ClockIcon />} label={`${summary.durationMinutes}분 집중`} />
+          <CompletionMetric icon={<ChecklistIcon />} label={remainingRequiredText} />
+        </div>
         <button
-          className="mt-6 min-h-14 w-full rounded-2xl bg-accent-strong px-5 text-lg font-bold text-white"
+          className="mt-6 min-h-16 w-full rounded-[18px] bg-[#ff5a4f] px-5 text-[28px] font-black text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)]"
           onClick={onClose}
           type="button"
         >
           확인
         </button>
+        <p className="mt-4 text-[17px] font-medium text-[#747b82]">
+          확인하면 오늘 화면으로 돌아가요
+        </p>
       </section>
     </div>
   );
@@ -491,12 +504,58 @@ function StudentAvatar() {
   );
 }
 
+function SuccessGarden() {
+  return (
+    <div className="relative mx-auto h-[106px] w-[260px]" aria-hidden>
+      <span className="absolute bottom-1 left-8 h-10 w-24 rounded-t-full bg-[#e7f2df]" />
+      <span className="absolute bottom-1 right-8 h-10 w-24 rounded-t-full bg-[#e7f2df]" />
+      <span className="absolute left-16 bottom-0">
+        <SproutIcon />
+      </span>
+      <span className="absolute right-10 bottom-0">
+        <SproutIcon />
+      </span>
+      <span className="absolute left-1/2 top-0 flex h-[92px] w-[92px] -translate-x-1/2 items-center justify-center rounded-full bg-[#e7f3df] text-accent">
+        <span className="h-8 w-14 -rotate-45 border-b-[9px] border-l-[9px] border-current" />
+      </span>
+      <span className="absolute left-5 top-7 h-3 w-3 rotate-45 bg-[#ffcf32]" />
+      <span className="absolute left-[70px] top-1 h-3 w-3 rotate-45 bg-[#ffcf32]" />
+      <span className="absolute right-6 top-12 h-3 w-3 rotate-45 bg-[#7cc9aa]" />
+      <span className="absolute right-20 top-5 h-3 w-3 rotate-45 bg-[#9cc783]" />
+      <span className="absolute right-[64px] top-1 h-4 w-4 rotate-[72deg] bg-[#ffcf32]" />
+    </div>
+  );
+}
+
+function CompletionMetric({ icon, label }: { icon: ReactNode; label: string }) {
+  return (
+    <div className="flex min-h-14 items-center justify-center gap-3 border-r border-[#e2e2e2] px-2 last:border-r-0">
+      <span className="text-accent">{icon}</span>
+      <span className="text-[18px] font-semibold leading-7 text-[#1f2b36]">{label}</span>
+    </div>
+  );
+}
+
 function SproutIcon() {
   return (
     <span className="relative h-10 w-12 shrink-0" aria-hidden>
       <span className="absolute bottom-0 left-1/2 h-7 w-1 -translate-x-1/2 rounded-full bg-[#81b86a]" />
       <span className="absolute left-1 top-2 h-5 w-8 rotate-12 rounded-tl-full rounded-br-full bg-[#87bd72]" />
       <span className="absolute right-1 top-1 h-5 w-8 -rotate-12 rounded-tr-full rounded-bl-full bg-[#78ae62]" />
+    </span>
+  );
+}
+
+function ChecklistIcon() {
+  return (
+    <span className="relative h-9 w-8 rounded-md border-[3px] border-current" aria-hidden>
+      <span className="absolute -top-2 left-1/2 h-3 w-4 -translate-x-1/2 rounded-full border-[3px] border-current bg-white" />
+      <span className="absolute left-1.5 top-2 h-1.5 w-1.5 rounded-full bg-current" />
+      <span className="absolute left-1.5 top-[18px] h-1.5 w-1.5 rounded-full bg-current" />
+      <span className="absolute left-1.5 top-7 h-1.5 w-1.5 rounded-full bg-current" />
+      <span className="absolute right-1.5 top-2.5 h-[3px] w-3 rounded-full bg-current" />
+      <span className="absolute right-1.5 top-5 h-[3px] w-3 rounded-full bg-current" />
+      <span className="absolute right-1.5 top-[30px] h-[3px] w-3 rounded-full bg-current" />
     </span>
   );
 }
