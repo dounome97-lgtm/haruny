@@ -4,9 +4,14 @@
   --background: #fbfaf6;
   --foreground: #142231;
   --surface: #ffffff;
-  --surface-soft: #f1f8f0;
+  --surface-soft: #eef6ec;
   --accent: #238742;
-  --accent-strong: #f25745;
+  --accent-strong: #ff5a4f;
+  --action: #ff5a4f;
+  --rest: #19a9a8;
+  --warm: #ffd66b;
+  --blue: #338cd8;
+  --line: #e6e6e6;
   --muted: #6b7280;
 }
 
@@ -17,6 +22,11 @@
   --color-surface-soft: var(--surface-soft);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
+  --color-action: var(--action);
+  --color-rest: var(--rest);
+  --color-warm: var(--warm);
+  --color-blue: var(--blue);
+  --color-line: var(--line);
   --color-muted: var(--muted);
 }
 

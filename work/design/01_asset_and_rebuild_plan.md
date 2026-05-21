@@ -114,16 +114,16 @@ public/
 
 ### 01 학생 오늘
 
-- `common/face-smile`
-- `common/sprout`
-- `student-today/white-mascot-cup`
-- `common/math-notebook`
-- `common/cup`
-- `common/sun`
-- `common/calendar`
-- `common/book-required`
-- `common/plus-extra`
-- `common/star-optional`
+- [x] `common/face-smile`
+- [x] `common/sprout`
+- [x] `student-today/white-mascot-cup`
+- [x] `common/math-notebook`
+- [x] `common/cup`
+- [x] `common/sun`
+- [x] `common/calendar`
+- [x] `common/book-required`
+- [x] `common/plus-extra`
+- [x] `common/star-optional`
 
 ### 02 학생 공부 중
 

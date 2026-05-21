@@ -4,6 +4,17 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { getTasksByMissionLevel } from "@/services/studentToday";
+import {
+  AppFrame,
+  AssetImage,
+  ButtonText,
+  HeroMessageCard,
+  IconCircleLink,
+  PrimaryActionButton,
+  ScreenHeader,
+  SecondaryActionButton,
+  SummaryMetricCard,
+} from "@/components/ui/HarunyAppUI";
 import type {
   StudentTodayView,
   StudyTask,
@@ -79,8 +90,7 @@ export function StudentTodayScreen({ initialToday }: { initialToday: StudentToda
   }
 
   return (
-    <main className="min-h-dvh bg-[var(--background)] px-5 py-6">
-      <div className="mx-auto flex min-h-[calc(100dvh-48px)] w-full max-w-[430px] flex-col gap-5">
+    <AppFrame>
         {mode === "studying" && activeTask ? (
           <StudyingView
             onComplete={handleComplete}
@@ -97,7 +107,6 @@ export function StudentTodayScreen({ initialToday }: { initialToday: StudentToda
             today={initialToday}
           />
         )}
-      </div>
       {completionSummary ? (
         <CompletionModal
           requiredLeft={requiredLeft}
@@ -105,7 +114,7 @@ export function StudentTodayScreen({ initialToday }: { initialToday: StudentToda
           onClose={() => setCompletionSummary(null)}
         />
       ) : null}
-    </main>
+    </AppFrame>
   );
 }
 
@@ -141,29 +150,40 @@ function TodayView({
 
   return (
     <>
-      <Header title="오늘" />
+      <ScreenHeader
+        action={<IconCircleLink href="/student/week" src="/assets/haruny/common/face-smile.svg" />}
+        title="오늘"
+      />
 
-      <section className="relative overflow-hidden rounded-[24px] bg-[#eef6ec] px-6 py-6 shadow-sm ring-1 ring-[#e1ece0]">
-        <div className="flex min-h-[96px] items-center gap-5">
-          <SproutIcon />
-          <div className="relative z-10">
-            <h2 className="text-[26px] font-extrabold leading-tight text-foreground">
-              {allRequiredDone ? "잘 끝냈어!" : "잘하고 있어!"}
-            </h2>
-            <p className="mt-3 text-[21px] font-medium leading-8 text-[#27313b]">
-              {allRequiredDone
-                ? "필수 미션은 모두 끝났어. 이제 가볍게 이어가면 돼."
-                : "지금 하나만 시작해 보면 충분해."}
-            </p>
-          </div>
-        </div>
-        <MascotCard />
-      </section>
+      <HeroMessageCard
+        body={
+          allRequiredDone
+            ? "필수 미션은 모두 끝났어. 이제 가볍게 이어가면 돼."
+            : "지금 하나만 시작해 보면 충분해."
+        }
+        icon={<AssetImage height={54} src="/assets/haruny/common/sprout.svg" width={54} />}
+        illustration={
+          <AssetImage
+            className="translate-x-2"
+            height={128}
+            priority
+            src="/assets/haruny/student-today/white-mascot-cup.svg"
+            width={154}
+          />
+        }
+        title={allRequiredDone ? "잘 끝냈어!" : "잘하고 있어!"}
+      />
 
       <section>
         <h2 className="mb-4 text-[25px] font-extrabold text-[#333]">다음 미션</h2>
         <div className="flex min-h-[142px] items-center gap-4 rounded-[22px] border border-[#cfe3c8] bg-white px-5 py-6 shadow-sm">
-          <NotebookIcon />
+          <AssetImage
+            className="shrink-0"
+            height={96}
+            priority
+            src="/assets/haruny/common/math-notebook.svg"
+            width={96}
+          />
           <div className="min-w-0">
             <h3 className="text-[32px] font-black leading-tight text-[#232323] min-[420px]:text-[36px]">
               지금 {nextTask.subject} {nextTask.estimatedMinutes}분
@@ -176,36 +196,24 @@ function TodayView({
       </section>
 
       <section className="grid grid-cols-2 gap-4">
-        <button
-          className="flex min-h-[112px] items-center justify-center gap-3 rounded-[22px] bg-[#ff5a4f] px-3 text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)] min-[420px]:gap-4 min-[420px]:px-4"
+        <PrimaryActionButton
           onClick={() => onStart(nextTask.id)}
-          type="button"
+          icon={
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[var(--action)] min-[420px]:h-14 min-[420px]:w-14">
+              <span className="ml-1 h-0 w-0 border-y-[11px] border-l-[17px] border-y-transparent border-l-current" />
+            </span>
+          }
         >
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#ff5a4f] min-[420px]:h-14 min-[420px]:w-14">
-            <span className="ml-1 h-0 w-0 border-y-[11px] border-l-[17px] border-y-transparent border-l-current" />
-          </span>
-          <span className="text-left">
-            <span className="block text-[24px] font-black leading-tight min-[420px]:text-[28px]">바로 시작</span>
-            <span className="mt-2 block text-base font-semibold text-white/90">
-              지금 바로 집중 모드
-            </span>
-          </span>
-        </button>
-          <button
-          className="flex min-h-[112px] items-center justify-center gap-3 rounded-[22px] bg-[#eefafa] px-3 text-[#19a9a8] shadow-sm ring-1 ring-[#d3eceb] min-[420px]:gap-4 min-[420px]:px-4"
-            type="button"
-          >
-          <CupIcon />
-          <span className="text-left">
-            <span className="block text-[24px] font-black leading-tight min-[420px]:text-[28px]">10분 쉬기</span>
-            <span className="mt-2 block text-base font-semibold text-[#6f7777]">
-              짧게 쉬고 다시 시작
-            </span>
-          </span>
-          </button>
+          <ButtonText body="지금 바로 집중 모드" title="바로 시작" />
+        </PrimaryActionButton>
+        <SecondaryActionButton
+          icon={<AssetImage height={58} src="/assets/haruny/common/cup.svg" width={58} />}
+        >
+          <ButtonText body="짧게 쉬고 다시 시작" title="10분 쉬기" />
+        </SecondaryActionButton>
       </section>
 
-      <section className="flex min-h-[76px] items-center justify-between rounded-[22px] bg-white px-5 py-4 shadow-sm ring-1 ring-black/10">
+      <SummaryMetricCard className="flex min-h-[76px] items-center justify-between px-5 py-4">
         <div className="flex items-center gap-4">
           <span className="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-[#257d34] text-[#257d34]">
             <span className="h-4 w-7 -rotate-45 border-b-[4px] border-l-[4px] border-current" />
@@ -217,22 +225,34 @@ function TodayView({
             </p>
           </div>
         </div>
-        <SunIcon />
-      </section>
+        <AssetImage height={58} src="/assets/haruny/common/sun.svg" width={58} />
+      </SummaryMetricCard>
 
       <section>
         <div className="flex items-center justify-between">
           <h2 className="text-[25px] font-extrabold text-[#333]">오늘 미션</h2>
           <p className="text-[20px] font-extrabold text-accent">필수 {requiredCount}개</p>
         </div>
-        <div className="mt-4 grid grid-cols-3 overflow-hidden rounded-[22px] bg-white shadow-sm ring-1 ring-black/10">
-          <MissionSummary icon={<BookIcon />} label="필수" value={`${requiredCount}개`} />
-          <MissionSummary icon={<PlusIcon />} label="추가" value={`${extraCount}개`} />
-          <MissionSummary icon={<StarIcon />} label="남으면" value={`${optionalCount}개`} />
-        </div>
+        <SummaryMetricCard className="mt-4 grid grid-cols-3 overflow-hidden">
+          <MissionSummary
+            icon={<AssetImage height={54} src="/assets/haruny/common/book-required.svg" width={54} />}
+            label="필수"
+            value={`${requiredCount}개`}
+          />
+          <MissionSummary
+            icon={<AssetImage height={54} src="/assets/haruny/common/plus-extra.svg" width={54} />}
+            label="추가"
+            value={`${extraCount}개`}
+          />
+          <MissionSummary
+            icon={<AssetImage height={54} src="/assets/haruny/common/star-optional.svg" width={54} />}
+            label="남으면"
+            value={`${optionalCount}개`}
+          />
+        </SummaryMetricCard>
       </section>
 
-      <section className="grid min-h-[88px] grid-cols-[1fr_1.15fr_1fr] items-center rounded-[22px] bg-white px-5 py-4 shadow-sm ring-1 ring-black/10">
+      <SummaryMetricCard className="grid min-h-[88px] grid-cols-[1fr_1.15fr_1fr] items-center px-5 py-4">
         <p className="text-[23px] font-black text-[#282828]">남은 시간</p>
         <div className="border-r border-[#e5e5e5] pr-5 text-center">
           <p className="text-base font-semibold text-[#747474]">공부할 시간</p>
@@ -246,14 +266,14 @@ function TodayView({
             {formatMinutes(spareMinutes)}
           </p>
         </div>
-      </section>
+      </SummaryMetricCard>
 
       <Link
         className="mb-2 flex min-h-[80px] items-center justify-between rounded-[22px] bg-white px-5 py-4 shadow-sm ring-1 ring-black/10"
         href="/student/week"
       >
         <div className="flex items-center gap-4">
-          <CalendarIcon />
+          <AssetImage height={54} src="/assets/haruny/common/calendar.svg" width={54} />
           <div>
             <p className="text-lg font-semibold text-[#555]">다음 일정</p>
             <p className="mt-1 text-[24px] font-bold text-[#242424]">
@@ -413,26 +433,6 @@ function CompletionModal({
   );
 }
 
-function Header({ eyebrow, title }: { eyebrow?: string; title: string }) {
-  return (
-    <header className="flex items-center justify-between">
-      <div>
-        {eyebrow ? <p className="text-sm font-semibold text-accent">{eyebrow}</p> : null}
-        <h1 className="text-[48px] font-black tracking-normal text-[#262626]">
-          {title}
-        </h1>
-      </div>
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm ring-2 ring-black/10">
-        <span className="relative h-7 w-7 rounded-full bg-[#7ecb86]" aria-hidden>
-          <span className="absolute left-[7px] top-[8px] h-1.5 w-1.5 rounded-full bg-white" />
-          <span className="absolute right-[7px] top-[8px] h-1.5 w-1.5 rounded-full bg-white" />
-          <span className="absolute bottom-[7px] left-[8px] h-2 w-3 rounded-b-full border-b-2 border-white" />
-        </span>
-      </div>
-    </header>
-  );
-}
-
 function StudyTopBar({ onPause }: { onPause: () => void }) {
   return (
     <header className="flex min-h-14 items-center justify-between border-b border-black/10 pb-5">
@@ -584,22 +584,6 @@ function CogIcon() {
   );
 }
 
-function MascotCard() {
-  return (
-    <div className="absolute bottom-0 right-5 hidden h-28 w-28 sm:block" aria-hidden>
-      <div className="absolute bottom-0 right-0 h-24 w-24 rounded-full bg-white shadow-sm" />
-      <div className="absolute right-6 top-8 h-2 w-2 rounded-full bg-[#222]" />
-      <div className="absolute right-14 top-8 h-2 w-2 rounded-full bg-[#222]" />
-      <div className="absolute right-9 top-[52px] h-3 w-6 rounded-b-full border-b-2 border-[#222]" />
-      <div className="absolute bottom-4 right-2 h-12 w-11 rounded-lg bg-[#62c28d]" />
-      <div className="absolute bottom-5 right-11 h-9 w-4 rounded-full bg-white ring-1 ring-[#e8e8e8]" />
-      <div className="absolute right-[82px] top-7 h-2 w-2 rounded-full bg-[#ffbf43]" />
-      <div className="absolute right-[74px] top-3 h-5 w-1 rotate-[-18deg] rounded-full bg-[#ffbf43]" />
-      <div className="absolute right-[58px] top-1 h-5 w-1 rotate-[-18deg] rounded-full bg-[#ffbf43]" />
-    </div>
-  );
-}
-
 function NotebookIcon() {
   return (
     <span className="relative h-20 w-20 shrink-0 min-[420px]:h-24 min-[420px]:w-24" aria-hidden>
@@ -618,67 +602,10 @@ function NotebookIcon() {
   );
 }
 
-function CupIcon() {
-  return (
-    <span className="relative h-12 w-14 shrink-0" aria-hidden>
-      <span className="absolute bottom-0 left-1 h-9 w-10 rounded-b-xl border-[4px] border-[#19a9a8]" />
-      <span className="absolute bottom-3 right-0 h-5 w-5 rounded-r-full border-[4px] border-l-0 border-[#19a9a8]" />
-      <span className="absolute left-4 top-0 h-4 w-1 rounded-full bg-[#19a9a8]" />
-      <span className="absolute left-7 top-0 h-4 w-1 rounded-full bg-[#19a9a8]" />
-    </span>
-  );
-}
-
-function SunIcon() {
-  return (
-    <span className="relative h-14 w-14 shrink-0 rounded-full bg-[#ffd66b]" aria-hidden>
-      {Array.from({ length: 8 }).map((_, index) => (
-        <span
-          className="absolute left-1/2 top-1/2 h-1.5 w-5 origin-left rounded-full bg-[#f7b52c]"
-          key={index}
-          style={{ transform: `rotate(${index * 45}deg) translate(22px, -3px)` }}
-        />
-      ))}
-    </span>
-  );
-}
-
-function BookIcon() {
-  return (
-    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e5f1df] text-[#2e7d37]" aria-hidden>
-      <span className="h-7 w-8 rounded-sm border-[3px] border-current border-l-[5px]" />
-    </span>
-  );
-}
-
-function PlusIcon() {
-  return (
-    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e5f6fb] text-[#139bb3]" aria-hidden>
-      <span className="relative h-7 w-7 rounded-full border-[3px] border-current">
-        <span className="absolute left-1/2 top-1/2 h-4 w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-current" />
-        <span className="absolute left-1/2 top-1/2 h-[3px] w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current" />
-      </span>
-    </span>
-  );
-}
-
 function StarIcon() {
   return (
     <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#fff0ca] text-[#f1bd2f]" aria-hidden>
       <span className="text-3xl leading-none">★</span>
-    </span>
-  );
-}
-
-function CalendarIcon() {
-  return (
-    <span className="relative h-12 w-12 shrink-0 rounded-lg border-[4px] border-[#1fb7b2]" aria-hidden>
-      <span className="absolute -top-2 left-2 h-4 w-1.5 rounded-full bg-[#1fb7b2]" />
-      <span className="absolute -top-2 right-2 h-4 w-1.5 rounded-full bg-[#1fb7b2]" />
-      <span className="absolute left-0 top-3 h-1 w-full bg-[#1fb7b2]" />
-      <span className="absolute left-2 top-6 h-1.5 w-1.5 rounded-full bg-[#1fb7b2]" />
-      <span className="absolute left-5 top-6 h-1.5 w-1.5 rounded-full bg-[#1fb7b2]" />
-      <span className="absolute right-2 top-6 h-1.5 w-1.5 rounded-full bg-[#1fb7b2]" />
     </span>
   );
 }

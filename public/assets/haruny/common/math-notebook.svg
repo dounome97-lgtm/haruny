@@ -1,0 +1,13 @@
+<svg width="152" height="152" viewBox="0 0 152 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="74" cy="132" rx="46" ry="8" fill="#DCE8D7"/>
+  <rect x="38" y="29" width="70" height="88" rx="8" transform="rotate(-8 38 29)" fill="#77B86A"/>
+  <rect x="48" y="20" width="70" height="96" rx="8" transform="rotate(-8 48 20)" fill="#F7FAED" stroke="#E4EAD8"/>
+  <g fill="#639A52">
+    <circle cx="45" cy="40" r="4"/><circle cx="48" cy="58" r="4"/><circle cx="50" cy="76" r="4"/><circle cx="53" cy="94" r="4"/>
+  </g>
+  <text x="64" y="60" fill="#86AD63" font-family="Arial, sans-serif" font-size="20" font-weight="700" transform="rotate(-8 64 60)">2×5=7</text>
+  <text x="70" y="88" fill="#86AD63" font-family="Arial, sans-serif" font-size="20" font-weight="700" transform="rotate(-8 70 88)">x=?</text>
+  <rect x="104" y="58" width="17" height="65" rx="8" transform="rotate(22 104 58)" fill="#F5C95B"/>
+  <path d="M128 117L112 111L112 128L128 117Z" fill="#3F4650"/>
+  <rect x="100" y="55" width="20" height="10" rx="4" transform="rotate(22 100 55)" fill="#D9DEE3"/>
+</svg>
