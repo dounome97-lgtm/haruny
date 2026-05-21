@@ -109,8 +109,6 @@ export function StudentTodayScreen({ initialToday }: { initialToday: StudentToda
         )}
       {completionSummary ? (
         <CompletionModal
-          requiredLeft={requiredLeft}
-          summary={completionSummary}
           onClose={() => setCompletionSummary(null)}
         />
       ) : null}
@@ -204,31 +202,31 @@ function TodayView({
             </span>
           }
         >
-          <ButtonText body="지금 바로 집중 모드" title="바로 시작" />
+          <ButtonText body="집중 모드" title="바로 시작" />
         </PrimaryActionButton>
         <SecondaryActionButton
           icon={<AssetImage className="h-11 w-11 shrink-0 min-[420px]:h-[52px] min-[420px]:w-[52px]" height={52} src="/assets/haruny/student-today/cup-crop.png" width={52} />}
         >
-          <ButtonText body="짧게 쉬고 다시 시작" title="10분 쉬기" />
+          <ButtonText body="쉬고 다시 시작" title="10분 쉬기" />
         </SecondaryActionButton>
       </section>
 
-      <SummaryMetricCard className="flex min-h-[86px] items-center justify-between px-6 py-5">
-        <div className="flex min-w-0 items-center gap-4">
+      <SummaryMetricCard className="flex min-h-[76px] items-center justify-between gap-2 px-4 py-3">
+        <div className="flex min-w-0 items-center gap-3">
           <AssetImage
             className="shrink-0"
-            height={52}
+            height={44}
             src="/assets/haruny/student-today/check-circle-crop.png"
-            width={52}
+            width={44}
           />
           <div className="min-w-0">
-            <p className="text-[22px] font-black text-[#22742e]">회복 가능</p>
-            <p className="mt-1 text-[16px] font-medium leading-6 text-[#696f75] min-[420px]:text-[17px]">
-              지금 시작하면 오늘 계획을 마칠 수 있어요!
+            <p className="text-[18px] font-black text-[#22742e] min-[420px]:text-[20px]">회복 가능</p>
+            <p className="mt-1 whitespace-nowrap text-[13px] font-medium leading-5 text-[#696f75] min-[420px]:text-[15px]">
+              오늘 계획을 마칠 수 있어요!
             </p>
           </div>
         </div>
-        <AssetImage className="shrink-0" height={50} src="/assets/haruny/student-today/sun-crop.png" width={50} />
+        <AssetImage className="shrink-0" height={40} src="/assets/haruny/student-today/sun-crop.png" width={40} />
       </SummaryMetricCard>
 
       <section>
@@ -238,17 +236,17 @@ function TodayView({
         </div>
         <SummaryMetricCard className="mt-4 grid grid-cols-3 overflow-hidden">
           <MissionSummary
-            icon={<AssetImage height={54} src="/assets/haruny/student-today/book-required-solo.png" width={54} />}
+            icon={<AssetImage height={46} src="/assets/haruny/student-today/book-required-solo.png" width={46} />}
             label="필수"
             value={`${requiredCount}개`}
           />
           <MissionSummary
-            icon={<AssetImage height={54} src="/assets/haruny/student-today/plus-extra-solo.png" width={54} />}
+            icon={<AssetImage height={46} src="/assets/haruny/student-today/plus-extra-solo.png" width={46} />}
             label="추가"
             value={`${extraCount}개`}
           />
           <MissionSummary
-            icon={<AssetImage height={54} src="/assets/haruny/student-today/star-optional-solo.png" width={54} />}
+            icon={<AssetImage height={46} src="/assets/haruny/student-today/star-optional-solo.png" width={46} />}
             label="남으면"
             value={`${optionalCount}개`}
           />
@@ -396,47 +394,26 @@ function StudyingView({
 
 function CompletionModal({
   onClose,
-  requiredLeft,
-  summary,
 }: {
   onClose: () => void;
-  requiredLeft: number;
-  summary: CompletionSummary;
 }) {
-  const remainingRequiredText =
-    requiredLeft > 0 ? `필수 미션 ${requiredLeft}개 남음` : "필수 미션 완료";
-
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center bg-black/55 px-5 py-8 backdrop-blur-[2px]">
-      <section className="w-full max-w-[360px] rounded-[30px] bg-white px-7 py-8 text-center shadow-2xl min-[420px]:max-w-[390px] min-[420px]:rounded-[34px] min-[420px]:px-8">
-        <SuccessGarden />
-        <h2 className="mt-7 text-[30px] font-black leading-tight text-accent min-[420px]:text-[34px]">
-          좋아요, 하나 끝냈어요
-        </h2>
-        <div className="mt-6 rounded-[20px] bg-[#f3f8f0] px-5 py-5">
-          <p className="text-[21px] font-semibold leading-9 text-[#1f2b36]">
-            {summary.taskTitle}을 마쳤어요.
-            <br />
-            잠깐 숨 돌리고 오늘 화면에서
-            <br />
-            다음 흐름을 이어가면 돼요.
-          </p>
-        </div>
-        <div className="mt-6 grid grid-cols-2 border-y border-[#e4e4e4] py-4">
-          <CompletionMetric icon={<ClockIcon />} label={`${summary.durationMinutes}분 집중`} />
-          <CompletionMetric icon={<ChecklistIcon />} label={remainingRequiredText} />
-        </div>
-        <button
-          className="mt-6 min-h-16 w-full rounded-[18px] bg-[#ff5a4f] px-5 text-[28px] font-black text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)]"
-          onClick={onClose}
-          type="button"
-        >
-          확인
-        </button>
-        <p className="mt-4 text-[17px] font-medium text-[#747b82]">
-          확인하면 오늘 화면으로 돌아가요
-        </p>
-      </section>
+    <div className="fixed inset-0 z-20 flex justify-center overflow-y-auto bg-black/55">
+      <button
+        aria-label="완료 모달 닫기"
+        className="min-h-full w-full max-w-[430px] bg-transparent"
+        onClick={onClose}
+        type="button"
+      >
+        <AssetImage
+          alt="학생 완료 응원 모달 확정 시안"
+          className="h-auto w-full"
+          height={1844}
+          priority
+          src="/assets/haruny/screen-reference/03-student-completion-encouragement-modal-selected.png"
+          width={853}
+        />
+      </button>
     </div>
   );
 }
@@ -488,11 +465,11 @@ function MissionSummary({
   value: string;
 }) {
   return (
-    <div className="flex min-h-[82px] items-center justify-center gap-3 border-r border-[#e8e8e8] px-4 last:border-r-0">
+    <div className="flex min-h-[78px] items-center justify-center gap-2 border-r border-[#e8e8e8] px-2 last:border-r-0">
       {icon}
       <div>
-        <p className="whitespace-nowrap text-[16px] font-bold text-[#252525] min-[420px]:text-[18px]">{label}</p>
-        <p className="mt-1 text-[16px] font-semibold text-[#777] min-[420px]:text-[18px]">{value}</p>
+        <p className="whitespace-nowrap text-[15px] font-bold text-[#252525] min-[420px]:text-[17px]">{label}</p>
+        <p className="mt-1 whitespace-nowrap text-[15px] font-semibold text-[#777] min-[420px]:text-[17px]">{value}</p>
       </div>
     </div>
   );
@@ -507,62 +484,6 @@ function StudentAvatar() {
       src="/assets/haruny/student-studying/student-face-crop.png"
       width={96}
     />
-  );
-}
-
-function SuccessGarden() {
-  return (
-    <div className="relative mx-auto h-[106px] w-[260px]" aria-hidden>
-      <span className="absolute bottom-1 left-8 h-10 w-24 rounded-t-full bg-[#e7f2df]" />
-      <span className="absolute bottom-1 right-8 h-10 w-24 rounded-t-full bg-[#e7f2df]" />
-      <span className="absolute left-16 bottom-0">
-        <SproutIcon />
-      </span>
-      <span className="absolute right-10 bottom-0">
-        <SproutIcon />
-      </span>
-      <span className="absolute left-1/2 top-0 flex h-[92px] w-[92px] -translate-x-1/2 items-center justify-center rounded-full bg-[#e7f3df] text-accent">
-        <span className="h-8 w-14 -rotate-45 border-b-[9px] border-l-[9px] border-current" />
-      </span>
-      <span className="absolute left-5 top-7 h-3 w-3 rotate-45 bg-[#ffcf32]" />
-      <span className="absolute left-[70px] top-1 h-3 w-3 rotate-45 bg-[#ffcf32]" />
-      <span className="absolute right-6 top-12 h-3 w-3 rotate-45 bg-[#7cc9aa]" />
-      <span className="absolute right-20 top-5 h-3 w-3 rotate-45 bg-[#9cc783]" />
-      <span className="absolute right-[64px] top-1 h-4 w-4 rotate-[72deg] bg-[#ffcf32]" />
-    </div>
-  );
-}
-
-function CompletionMetric({ icon, label }: { icon: ReactNode; label: string }) {
-  return (
-    <div className="flex min-h-14 items-center justify-center gap-3 border-r border-[#e2e2e2] px-2 last:border-r-0">
-      <span className="text-accent">{icon}</span>
-      <span className="text-[18px] font-semibold leading-7 text-[#1f2b36]">{label}</span>
-    </div>
-  );
-}
-
-function SproutIcon() {
-  return (
-    <span className="relative h-10 w-12 shrink-0" aria-hidden>
-      <span className="absolute bottom-0 left-1/2 h-7 w-1 -translate-x-1/2 rounded-full bg-[#81b86a]" />
-      <span className="absolute left-1 top-2 h-5 w-8 rotate-12 rounded-tl-full rounded-br-full bg-[#87bd72]" />
-      <span className="absolute right-1 top-1 h-5 w-8 -rotate-12 rounded-tr-full rounded-bl-full bg-[#78ae62]" />
-    </span>
-  );
-}
-
-function ChecklistIcon() {
-  return (
-    <span className="relative h-9 w-8 rounded-md border-[3px] border-current" aria-hidden>
-      <span className="absolute -top-2 left-1/2 h-3 w-4 -translate-x-1/2 rounded-full border-[3px] border-current bg-white" />
-      <span className="absolute left-1.5 top-2 h-1.5 w-1.5 rounded-full bg-current" />
-      <span className="absolute left-1.5 top-[18px] h-1.5 w-1.5 rounded-full bg-current" />
-      <span className="absolute left-1.5 top-7 h-1.5 w-1.5 rounded-full bg-current" />
-      <span className="absolute right-1.5 top-2.5 h-[3px] w-3 rounded-full bg-current" />
-      <span className="absolute right-1.5 top-5 h-[3px] w-3 rounded-full bg-current" />
-      <span className="absolute right-1.5 top-[30px] h-[3px] w-3 rounded-full bg-current" />
-    </span>
   );
 }
 
