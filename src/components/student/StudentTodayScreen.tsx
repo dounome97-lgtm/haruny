@@ -278,46 +278,89 @@ function StudyingView({
 }) {
   return (
     <>
-      <Header eyebrow="민준이의 집중 시간" title="공부 중" />
-      <section className="rounded-[32px] bg-surface-soft p-6 shadow-sm ring-1 ring-[#dce8dd]">
-        <p className="text-sm font-semibold text-accent">현재 미션</p>
-        <h1 className="mt-4 text-4xl font-bold leading-tight text-accent">
-          {task.title}
-        </h1>
-        <p className="mt-4 text-lg leading-8 text-slate-600">
-          끝나면 5분 쉬고 다음 미션으로 넘어가요.
-        </p>
-      </section>
+      <StudyTopBar onPause={onPause} />
 
-      <section className="rounded-[32px] bg-surface p-6 text-center shadow-sm ring-1 ring-black/5">
-        <p className="text-sm font-semibold text-muted">남은 시간</p>
-        <p className="mt-4 text-6xl font-black text-accent">
-          {task.estimatedMinutes}
-          <span className="ml-1 text-3xl">분</span>
-        </p>
-        <div className="mt-6 h-4 overflow-hidden rounded-full bg-[#edf5ec]">
-          <div className="h-full w-2/5 rounded-full bg-accent" />
+      <section className="flex items-center gap-4">
+        <StudentAvatar />
+        <div className="relative flex-1 rounded-[28px] bg-[#eef6e8] px-6 py-5 shadow-sm ring-1 ring-[#dfeadc] before:absolute before:left-[-14px] before:top-9 before:h-0 before:w-0 before:border-y-[13px] before:border-r-[16px] before:border-y-transparent before:border-r-[#eef6e8]">
+          <h2 className="text-[30px] font-black leading-tight text-accent">
+            잘하고 있어요!
+          </h2>
+          <p className="mt-4 text-[22px] font-medium leading-8 text-[#1f2b36]">
+            지금 흐름 좋아요.
+            <br />
+            집중한 시간이 쌓이고 있어요.
+          </p>
+          <span className="absolute bottom-6 right-7 text-3xl text-[#65b36a]">♥</span>
         </div>
-        <p className="mt-4 text-base text-muted">
-          예상 종료 시각은 지금부터 {task.estimatedMinutes}분 뒤예요.
+      </section>
+
+      <section className="min-h-[230px] rounded-[28px] bg-white px-6 py-6 shadow-[0_10px_30px_rgba(20,34,49,0.08)] ring-1 ring-black/5">
+        <span className="inline-flex rounded-full bg-[#edf8ea] px-5 py-2 text-[22px] font-black text-accent ring-1 ring-[#d8ead2]">
+          현재 미션
+        </span>
+        <h1 className="mt-8 text-[46px] font-black leading-tight text-[#1f2b36]">
+          {task.subject} 오답
+        </h1>
+        <p className="mt-4 text-[27px] font-semibold leading-9 text-[#6e7780]">
+          {task.title.replace(`${task.subject} `, "")}
+        </p>
+        <div className="mt-8">
+          <NotebookIcon />
+        </div>
+      </section>
+
+      <section className="rounded-[28px] bg-[#eef6ec] px-6 py-6 text-center shadow-sm ring-1 ring-[#dfeadc]">
+        <div className="flex items-center justify-center gap-3 text-accent">
+          <ClockIcon />
+          <p className="text-[28px] font-black">남은 시간</p>
+        </div>
+        <p className="mt-5 text-[82px] font-black leading-none text-accent">
+          {formatTimerMinutes(Math.max(task.estimatedMinutes - 8, 1))}
+        </p>
+        <div className="mx-auto mt-8 h-4 w-[88%] overflow-hidden rounded-full bg-[#dfe5df]">
+          <div className="h-full w-[68%] rounded-full bg-[#59b96a]" />
+        </div>
+        <p className="mt-4 text-[22px] font-semibold text-[#6d747b]">
+          총 {task.estimatedMinutes}분
         </p>
       </section>
 
-      <section className="mt-auto space-y-3 pb-2">
+      <section className="grid grid-cols-2 gap-4">
         <button
-          className="min-h-16 w-full rounded-[24px] bg-accent-strong px-5 text-xl font-bold text-white shadow-[0_12px_24px_rgba(242,87,69,0.22)]"
+          className="flex min-h-[98px] items-center justify-center gap-4 rounded-[22px] bg-[#ff5a4f] px-4 text-white shadow-[0_14px_28px_rgba(255,90,79,0.22)]"
           onClick={onComplete}
           type="button"
         >
-          끝냈어요
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[#ff5a4f]">
+            <span className="h-4 w-7 -rotate-45 border-b-[5px] border-l-[5px] border-current" />
+          </span>
+          <span className="text-[28px] font-black">끝냈어요</span>
         </button>
         <button
-          className="min-h-14 w-full rounded-[22px] border border-[#c9e2cf] bg-white px-5 text-lg font-bold text-accent"
+          className="flex min-h-[98px] items-center justify-center gap-4 rounded-[22px] bg-[#eefafa] px-4 text-[#149e9a] shadow-sm ring-1 ring-[#d3eceb]"
           onClick={onPause}
           type="button"
         >
-          잠깐 멈춤
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[#149e9a]">
+            <span className="h-7 w-2 rounded-full bg-current" />
+            <span className="ml-2 h-7 w-2 rounded-full bg-current" />
+          </span>
+          <span className="text-[28px] font-black">잠깐 멈춤</span>
         </button>
+      </section>
+
+      <section className="mb-2 flex min-h-[92px] items-center justify-between rounded-[24px] border border-[#f4d88c] bg-[#fffdf5] px-6 py-5 shadow-sm">
+        <div className="flex items-center gap-4">
+          <StarIcon />
+          <div>
+            <p className="text-[22px] font-black text-accent">다음 행동 미리보기</p>
+            <p className="mt-2 text-[28px] font-black leading-tight text-[#1f2b36]">
+              끝나면 영어 단어
+            </p>
+          </div>
+        </div>
+        <SmallBookIcon />
       </section>
     </>
   );
@@ -377,6 +420,29 @@ function Header({ eyebrow, title }: { eyebrow?: string; title: string }) {
   );
 }
 
+function StudyTopBar({ onPause }: { onPause: () => void }) {
+  return (
+    <header className="flex min-h-14 items-center justify-between border-b border-black/10 pb-5">
+      <button
+        aria-label="오늘 화면으로 돌아가기"
+        className="flex h-11 w-11 items-center justify-center text-[#1f2b36]"
+        onClick={onPause}
+        type="button"
+      >
+        <span className="h-5 w-5 -rotate-45 border-l-[4px] border-t-[4px] border-current" />
+      </button>
+      <h1 className="text-[38px] font-black text-[#1f2b36]">공부 중</h1>
+      <button
+        aria-label="설정"
+        className="flex h-11 w-11 items-center justify-center text-[#1f2b36]"
+        type="button"
+      >
+        <CogIcon />
+      </button>
+    </header>
+  );
+}
+
 function formatMinutes(minutes: number) {
   if (minutes >= 60) {
     const hours = Math.floor(minutes / 60);
@@ -385,6 +451,10 @@ function formatMinutes(minutes: number) {
   }
 
   return `${minutes}분`;
+}
+
+function formatTimerMinutes(minutes: number) {
+  return `${String(minutes).padStart(2, "0")}:00`;
 }
 
 function MissionSummary({
@@ -407,12 +477,50 @@ function MissionSummary({
   );
 }
 
+function StudentAvatar() {
+  return (
+    <span className="relative h-[112px] w-[112px] shrink-0 overflow-hidden rounded-full bg-[#e6f3dc]" aria-hidden>
+      <span className="absolute left-[26px] top-[18px] h-16 w-16 rounded-full bg-[#ffc29b]" />
+      <span className="absolute left-[22px] top-[16px] h-8 w-20 -rotate-6 rounded-t-full bg-[#6b432a]" />
+      <span className="absolute left-[31px] top-[44px] h-2 w-2 rounded-full bg-[#1f2b36]" />
+      <span className="absolute right-[31px] top-[44px] h-2 w-2 rounded-full bg-[#1f2b36]" />
+      <span className="absolute left-[46px] top-[56px] h-2 w-5 rounded-b-full border-b-2 border-[#e96a4b]" />
+      <span className="absolute bottom-[-12px] left-[18px] h-16 w-20 rounded-t-[32px] bg-[#67a763]" />
+      <span className="absolute bottom-4 left-[42px] h-8 w-8 rounded-b-full bg-[#ffc29b]" />
+    </span>
+  );
+}
+
 function SproutIcon() {
   return (
     <span className="relative h-10 w-12 shrink-0" aria-hidden>
       <span className="absolute bottom-0 left-1/2 h-7 w-1 -translate-x-1/2 rounded-full bg-[#81b86a]" />
       <span className="absolute left-1 top-2 h-5 w-8 rotate-12 rounded-tl-full rounded-br-full bg-[#87bd72]" />
       <span className="absolute right-1 top-1 h-5 w-8 -rotate-12 rounded-tr-full rounded-bl-full bg-[#78ae62]" />
+    </span>
+  );
+}
+
+function ClockIcon() {
+  return (
+    <span className="relative h-8 w-8 rounded-full border-[3px] border-current" aria-hidden>
+      <span className="absolute left-1/2 top-1/2 h-3 w-[3px] -translate-x-1/2 -translate-y-full rounded-full bg-current" />
+      <span className="absolute left-1/2 top-1/2 h-[3px] w-3 -translate-y-1/2 rounded-full bg-current" />
+    </span>
+  );
+}
+
+function CogIcon() {
+  return (
+    <span className="relative h-8 w-8 rounded-full border-[4px] border-current" aria-hidden>
+      {Array.from({ length: 8 }).map((_, index) => (
+        <span
+          className="absolute left-1/2 top-1/2 h-2 w-3 origin-left rounded-full bg-current"
+          key={index}
+          style={{ transform: `rotate(${index * 45}deg) translate(14px, -4px)` }}
+        />
+      ))}
+      <span className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current" />
     </span>
   );
 }
@@ -512,6 +620,18 @@ function CalendarIcon() {
       <span className="absolute left-2 top-6 h-1.5 w-1.5 rounded-full bg-[#1fb7b2]" />
       <span className="absolute left-5 top-6 h-1.5 w-1.5 rounded-full bg-[#1fb7b2]" />
       <span className="absolute right-2 top-6 h-1.5 w-1.5 rounded-full bg-[#1fb7b2]" />
+    </span>
+  );
+}
+
+function SmallBookIcon() {
+  return (
+    <span className="relative h-14 w-12 shrink-0" aria-hidden>
+      <span className="absolute inset-x-1 top-1 h-12 rounded-md bg-[#58b982]" />
+      <span className="absolute inset-x-2 top-0 h-12 rounded-md bg-[#6fc999] shadow-sm" />
+      <span className="absolute left-3 top-1 h-10 w-1 rounded-full bg-white/45" />
+      <span className="absolute right-4 top-3 text-2xl font-black text-white">A</span>
+      <span className="absolute bottom-0 left-2 h-2 w-8 rounded-b-md bg-[#e9f7ec]" />
     </span>
   );
 }
