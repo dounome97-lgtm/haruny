@@ -28,8 +28,10 @@
 
 - 1차 MVP 구현과 검증 정리는 완료된 상태다.
 - `work/plans/07_체크리스트형_개발_백로그.md` 기준으로 15단계 `MVP 검증`까지 체크되어 있다.
-- 마지막 확인 시점의 워킹트리는 깨끗했다.
-- 마지막 확인 커밋은 `52e0665 feat: implement study planning MVP screens`였다.
+- Vercel preview 배포는 연결되어 있으며, 최신 push 후 자동 배포된다.
+- 확정 시안 PNG만으로 CSS 재현을 진행한 결과 시각 품질이 떨어져, Figma형 디자인 스펙과 asset 기반 재구현으로 방향을 수정했다.
+- 디자인 기준 문서: `work/design/00_figma_like_design_spec.md`
+- asset/재구현 계획 문서: `work/design/01_asset_and_rebuild_plan.md`
 - 로컬 개발 서버는 `npm run dev -- --hostname 127.0.0.1 --port 3000` 방식으로 실행 가능하다.
 
 ## 구현된 큰 범위
@@ -44,8 +46,11 @@
 
 ## 다음 후보 작업
 
-- Vercel 배포 화면과 `work/design/screens` 확정 시안을 대조하고 구현 화면을 보정.
-- 보정 후 Vercel preview 배포로 실제 휴대폰에서 주요 화면 점검.
+- `public/assets/haruny` asset 폴더 구조 생성.
+- `src/styles/designTokens.ts`와 `src/app/globals.css`를 Figma형 디자인 스펙 기준으로 보강.
+- 공통 앱 프레임/카드/버튼 컴포넌트 설계.
+- 학생 `오늘` 화면부터 asset 기반으로 다시 재구현.
+- 재구현 후 Vercel preview 배포로 실제 휴대폰에서 주요 화면 점검.
 - 긴 학생 이름, 긴 과목명, 긴 안내 문구가 카드와 버튼에서 깨지지 않는지 확인.
 - 화면 간 진입 경로를 다시 확인하고 MVP 데모 동선을 정리.
 - Supabase 테스트 DB 기반 MVP 저장/조회 구조 설계.
