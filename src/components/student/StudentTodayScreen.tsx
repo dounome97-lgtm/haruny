@@ -151,7 +151,7 @@ function TodayView({
   return (
     <>
       <ScreenHeader
-        action={<IconCircleLink href="/student/week" src="/assets/haruny/common/face-smile.svg" />}
+        action={<IconCircleLink href="/student/week" src="/assets/haruny/student-today/face-smile-crop.png" />}
         title="오늘"
       />
 
@@ -161,14 +161,14 @@ function TodayView({
             ? "필수 미션은 모두 끝났어. 이제 가볍게 이어가면 돼."
             : "지금 하나만 시작해 보면 충분해."
         }
-        icon={<AssetImage height={54} src="/assets/haruny/common/sprout.svg" width={54} />}
+        icon={<AssetImage className="h-11 w-11 shrink-0" height={44} src="/assets/haruny/student-today/sprout-crop.png" width={44} />}
         illustration={
           <AssetImage
-            className="translate-x-2"
-            height={104}
+            className="translate-x-3"
+            height={92}
             priority
-            src="/assets/haruny/student-today/white-mascot-cup.svg"
-            width={128}
+            src="/assets/haruny/student-today/white-mascot-cup-crop.png"
+            width={118}
           />
         }
         title={allRequiredDone ? "잘 끝냈어!" : "잘하고 있어!"}
@@ -176,19 +176,19 @@ function TodayView({
 
       <section>
         <h2 className="mb-4 text-[25px] font-extrabold text-[#333]">다음 미션</h2>
-        <div className="flex min-h-[136px] items-center gap-5 rounded-[22px] border border-[#cfe3c8] bg-white px-7 py-6 shadow-sm">
+        <div className="flex min-h-[128px] items-center gap-5 rounded-[22px] border border-[#cfe3c8] bg-white px-7 py-5 shadow-sm">
           <AssetImage
-            className="shrink-0"
-            height={86}
+            className="h-[98px] w-[98px] shrink-0"
+            height={98}
             priority
-            src="/assets/haruny/common/math-notebook.svg"
-            width={86}
+            src="/assets/haruny/student-today/math-notebook-card.png"
+            width={98}
           />
           <div className="min-w-0">
-            <h3 className="whitespace-nowrap text-[26px] font-black leading-tight text-[#232323] min-[420px]:text-[32px]">
+            <h3 className="whitespace-nowrap text-[27px] font-black leading-tight text-[#232323] min-[420px]:text-[32px]">
               지금 {nextTask.subject} {nextTask.estimatedMinutes}분
             </h3>
-            <p className="mt-3 text-[18px] font-semibold leading-7 text-[#777] min-[420px]:text-[20px]">
+            <p className="mt-3 text-[19px] font-semibold leading-7 text-[#777] min-[420px]:text-[21px]">
               {nextTask.title.replace(`${nextTask.subject} `, "")}
             </p>
           </div>
@@ -207,7 +207,7 @@ function TodayView({
           <ButtonText body="지금 바로 집중 모드" title="바로 시작" />
         </PrimaryActionButton>
         <SecondaryActionButton
-          icon={<AssetImage className="h-11 w-11 shrink-0 min-[420px]:h-[52px] min-[420px]:w-[52px]" height={52} src="/assets/haruny/common/cup.svg" width={52} />}
+          icon={<AssetImage className="h-11 w-11 shrink-0 min-[420px]:h-[52px] min-[420px]:w-[52px]" height={52} src="/assets/haruny/student-today/cup-crop.png" width={52} />}
         >
           <ButtonText body="짧게 쉬고 다시 시작" title="10분 쉬기" />
         </SecondaryActionButton>
@@ -218,7 +218,7 @@ function TodayView({
           <AssetImage
             className="shrink-0"
             height={52}
-            src="/assets/haruny/common/check-circle.svg"
+            src="/assets/haruny/student-today/check-circle-crop.png"
             width={52}
           />
           <div className="min-w-0">
@@ -228,7 +228,7 @@ function TodayView({
             </p>
           </div>
         </div>
-        <AssetImage className="shrink-0" height={50} src="/assets/haruny/common/sun.svg" width={50} />
+        <AssetImage className="shrink-0" height={50} src="/assets/haruny/student-today/sun-crop.png" width={50} />
       </SummaryMetricCard>
 
       <section>
@@ -238,17 +238,17 @@ function TodayView({
         </div>
         <SummaryMetricCard className="mt-4 grid grid-cols-3 overflow-hidden">
           <MissionSummary
-            icon={<AssetImage height={54} src="/assets/haruny/common/book-required.svg" width={54} />}
+            icon={<AssetImage height={54} src="/assets/haruny/student-today/book-required-solo.png" width={54} />}
             label="필수"
             value={`${requiredCount}개`}
           />
           <MissionSummary
-            icon={<AssetImage height={54} src="/assets/haruny/common/plus-extra.svg" width={54} />}
+            icon={<AssetImage height={54} src="/assets/haruny/student-today/plus-extra-solo.png" width={54} />}
             label="추가"
             value={`${extraCount}개`}
           />
           <MissionSummary
-            icon={<AssetImage height={54} src="/assets/haruny/common/star-optional.svg" width={54} />}
+            icon={<AssetImage height={54} src="/assets/haruny/student-today/star-optional-solo.png" width={54} />}
             label="남으면"
             value={`${optionalCount}개`}
           />
@@ -276,7 +276,7 @@ function TodayView({
         href="/student/week"
       >
         <div className="flex items-center gap-4">
-          <AssetImage height={50} src="/assets/haruny/common/calendar.svg" width={50} />
+          <AssetImage height={50} src="/assets/haruny/student-today/calendar-solo.png" width={50} />
           <div>
             <p className="text-[16px] font-semibold text-[#555]">다음 일정</p>
             <p className="mt-1 text-[20px] font-bold text-[#242424] min-[420px]:text-[22px]">

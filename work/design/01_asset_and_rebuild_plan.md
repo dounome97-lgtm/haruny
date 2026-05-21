@@ -124,6 +124,20 @@ public/
 - [x] `common/book-required`
 - [x] `common/plus-extra`
 - [x] `common/star-optional`
+- [x] `student-today/sprout-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/white-mascot-cup-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/math-notebook-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/cup-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/check-circle-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/sun-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/book-required-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/plus-extra-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/star-optional-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/calendar-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/face-smile-crop.png` - 시안 PNG에서 crop
+- [x] `student-today/*-solo.png` - 캐시/오염 crop 방지를 위한 정리본
+- [x] `student-today/math-notebook-full.png` - 카드 배경과 자연스럽게 섞기 위한 넓은 crop
+- [x] `student-today/math-notebook-card.png` - 다음 미션 카드용 crop
 
 ### 02 학생 공부 중
 
