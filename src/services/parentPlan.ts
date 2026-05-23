@@ -6,7 +6,6 @@ import {
   mockParentExamPlanReview,
   mockParentExamPrep,
   mockParentNotificationSettings,
-  mockParentReassurance,
   mockParentRoutineCreate,
   mockParentExamSubjectEntry,
   mockParentTodayAdjustment,
@@ -21,6 +20,7 @@ import {
 } from "@/domain/familySchedule";
 import { generateLongTermExamPlan } from "@/domain/longTermPlan";
 import { generateRoutinePlan } from "@/domain/routinePlan";
+import { getMvpReadRepository } from "@/services/mvpRepository";
 import type { ExamSubject } from "@/types/study";
 
 export function getParentExamPrepView() {
@@ -79,8 +79,8 @@ export function getParentRoutineCreateView() {
   };
 }
 
-export function getParentReassuranceView() {
-  return mockParentReassurance;
+export async function getParentReassuranceView() {
+  return getMvpReadRepository().getParentReassuranceView();
 }
 
 export function getParentTodayAdjustmentView() {

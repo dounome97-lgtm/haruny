@@ -15,9 +15,11 @@ const routineCapacities = [
 
 export function ParentRoutineCreateScreen({
   isFamilyRhythmConfirmed,
+  onStartAction,
   routine,
 }: {
   isFamilyRhythmConfirmed: boolean;
+  onStartAction?: (formData: FormData) => Promise<void>;
   routine: ParentRoutineCreateView;
 }) {
   const [routineRules, setRoutineRules] = useState<RoutineDraft[]>([
@@ -356,12 +358,29 @@ export function ParentRoutineCreateScreen({
           </div>
         </section>
 
-        <Link
-          className="mt-auto flex min-h-16 items-center justify-center rounded-[24px] bg-accent-strong px-5 text-xl font-bold text-white shadow-[0_12px_24px_rgba(242,87,69,0.22)]"
-          href="/"
-        >
-          이 루틴으로 시작
-        </Link>
+        {onStartAction ? (
+          <RoutineStartForm
+            action={onStartAction}
+            draft={{
+              applicationPeriod: {
+                endDate,
+                examPrepSwitchDate: switchDate,
+                startDate,
+              },
+              rules: routineRules.map((rule, index) => ({
+                ...rule,
+                priority: index,
+              })),
+            }}
+          />
+        ) : (
+          <Link
+            className="mt-auto flex min-h-16 items-center justify-center rounded-[24px] bg-accent-strong px-5 text-xl font-bold text-white shadow-[0_12px_24px_rgba(242,87,69,0.22)]"
+            href="/"
+          >
+            이 루틴으로 시작
+          </Link>
+        )}
       </div>
       {pendingDeleteRoutine ? (
         <RoutineDeleteConfirmModal
@@ -371,6 +390,33 @@ export function ParentRoutineCreateScreen({
         />
       ) : null}
     </main>
+  );
+}
+
+function RoutineStartForm({
+  action,
+  draft,
+}: {
+  action: (formData: FormData) => Promise<void>;
+  draft: {
+    applicationPeriod: {
+      endDate: string;
+      examPrepSwitchDate: string;
+      startDate: string;
+    };
+    rules: RoutineDraft[];
+  };
+}) {
+  return (
+    <form action={action} className="mt-auto">
+      <input name="routineDraft" type="hidden" value={JSON.stringify(draft)} />
+      <button
+        className="flex min-h-16 w-full items-center justify-center rounded-[24px] bg-accent-strong px-5 text-xl font-bold text-white shadow-[0_12px_24px_rgba(242,87,69,0.22)]"
+        type="submit"
+      >
+        이 루틴으로 시작
+      </button>
+    </form>
   );
 }
 

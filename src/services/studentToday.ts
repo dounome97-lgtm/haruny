@@ -11,27 +11,36 @@ import {
 import { calculateDayCoach, pickNextTask } from "@/domain/dayCoach";
 import { createFamilyTimeBlocks } from "@/domain/familySchedule";
 import { generateLongTermExamPlan } from "@/domain/longTermPlan";
+import { getMvpReadRepository, type StudentTodaySeed } from "@/services/mvpRepository";
 import { toIsoExamSubjects } from "@/services/parentPlan";
 import type { MissionLevel, StudentTodayView, StudyTask } from "@/types/study";
 
-export function getStudentTodayView(): StudentTodayView {
+export async function getStudentTodayView(): Promise<StudentTodayView> {
+  const seed = await getMvpReadRepository().getStudentTodaySeed();
+
+  return buildStudentTodayView(seed);
+}
+
+export function buildStudentTodayView(seed: StudentTodaySeed): StudentTodayView {
   const generatedPlan = generateLongTermExamPlan({
-    currentDate: "2026-07-23",
-    examEndDate: "2026-08-22",
-    examName: "8월 기말고사",
-    examStartDate: "2026-08-20",
-    routineRules: mockRoutineRules,
-    studentId: "user-student-minjun",
-    subjects: toIsoExamSubjects(mockExamSubjects),
+    currentDate: seed.currentDate,
+    examEndDate: seed.examEndDate,
+    examName: seed.examName,
+    examStartDate: seed.examStartDate,
+    routineRules: seed.routineRules,
+    studentId: seed.studentId,
+    subjects: toIsoExamSubjects(seed.subjects),
   });
-  const tasks = generatedPlan.todayPlan.tasks;
-  const timeBlocks = createFamilyTimeBlocks({
-    currentDate: "2026-07-23",
-    profile: mockStudentProfile,
-    rhythm: mockFamilyDailyRhythm,
-  });
-  const coach = calculateDayCoach({
-    currentTime: "19:30",
+  const tasks = seed.savedTasks ?? generatedPlan.todayPlan.tasks;
+  const timeBlocks =
+    seed.savedTimeBlocks ??
+    createFamilyTimeBlocks({
+      currentDate: seed.currentDate,
+      profile: seed.profile,
+      rhythm: seed.familyRhythm,
+    });
+  const coach = seed.savedCoach ?? calculateDayCoach({
+    currentTime: seed.currentTime,
     tasks,
     timeBlocks,
   });
@@ -39,15 +48,31 @@ export function getStudentTodayView(): StudentTodayView {
     pickNextTask(tasks) ?? mockStudentToday.nextTask;
 
   return {
-    ...mockStudentToday,
+    ...seed.fallbackView,
     coach,
+    dateLabel: formatKoreanDateLabel(seed.currentDate),
     headline: coach.message,
     nextTask,
+    studentName: seed.studentName ?? seed.fallbackView.studentName,
     tasks,
     timeBlocks,
     subcopy: "남은 시간 안에서 필수 미션부터 가볍게 이어가요.",
   };
 }
+
+export const mockStudentTodaySeed: StudentTodaySeed = {
+  currentDate: "2026-07-23",
+  currentTime: "19:30",
+  examEndDate: "2026-08-22",
+  examName: "8월 기말고사",
+  examStartDate: "2026-08-20",
+  fallbackView: mockStudentToday,
+  familyRhythm: mockFamilyDailyRhythm,
+  profile: mockStudentProfile,
+  routineRules: mockRoutineRules,
+  studentId: "user-student-minjun",
+  subjects: mockExamSubjects,
+};
 
 export function getStudentWeekView() {
   return mockStudentWeek;
@@ -76,4 +101,12 @@ export function getMissionLevelLabel(missionLevel: MissionLevel): string {
   };
 
   return labels[missionLevel];
+}
+
+function formatKoreanDateLabel(date: string): string {
+  const [year, month, day] = date.split("-").map(Number);
+  const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+  const weekday = new Date(year, month - 1, day).getDay();
+
+  return `${month}월 ${day}일 ${weekdays[weekday]}요일`;
 }

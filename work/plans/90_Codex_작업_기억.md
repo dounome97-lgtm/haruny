@@ -28,19 +28,22 @@
 ## 현재 상태
 
 - 1차 MVP 구현과 검증 정리는 완료된 상태다.
-- `work/plans/07_체크리스트형_개발_백로그.md` 기준으로 15단계 `MVP 검증`까지 체크되어 있다.
-- Vercel preview 배포는 연결되어 있으며, 최신 push 후 자동 배포된다.
+- `work/plans/07_체크리스트형_개발_백로그.md` 기준으로 18단계 `Supabase 테스트 DB 기반 MVP`까지 완료된 상태다.
+- Vercel 배포는 연결되어 있으며, 최신 `main` 커밋 `8f35dc49e6b55e382e60280c1141b5f958a39098`이 `https://haruny.vercel.app`에 반영되어 있음을 확인했다.
 - 확정 시안 PNG만으로 CSS 재현을 진행한 결과 시각 품질이 떨어져, Figma형 디자인 스펙과 asset 기반 재구현으로 방향을 수정했다.
 - 디자인 기준 문서: `work/design/00_figma_like_design_spec.md`
 - asset/재구현 계획 문서: `work/design/01_asset_and_rebuild_plan.md`
 - `public/assets/haruny` asset 폴더와 학생 `오늘`/`공부 중` 화면용 1차 asset을 생성했다.
 - 학생 `오늘` 화면과 `공부 중` 화면은 품질 저하가 큰 일러스트를 시안 PNG crop asset으로 교체하고, 폰트/높이/버튼 여백을 시안에 가깝게 낮췄다.
 - 학생 `오늘` 화면과 `공부 중` 화면은 공통 UI 컴포넌트와 asset 기반으로 1차 재구현했다.
-- 학생 완료 모달, 학생 하루 마감/이번 주/오늘 줄이기, 부모 안심/마감/조정/알림, 계획/루틴/가족 설정 화면은 확정 시안 PNG를 `public/assets/haruny/screen-reference`에 두고 로컬 확인용 고품질 reference 화면으로 연결했다.
-- 위 reference 화면들은 최종 인터랙션 구현이라기보다 시각 품질 확인용 단계다. 사용자가 로컬에서 확인한 뒤 승인하면 필요한 화면부터 컴포넌트/상태/입력 흐름을 다시 붙인다.
-- 사용자가 로컬 확인 전까지 커밋/푸시는 하지 않기로 했다. Vercel 배포 화면 대조는 push 이후에만 진행한다.
+- 학생 완료 모달, 학생 하루 마감/이번 주/오늘 줄이기, 부모 마감/조정/알림, 계획/가족 설정 화면은 확정 시안 PNG를 `public/assets/haruny/screen-reference`에 두고 로컬 확인용 고품질 reference 화면으로 연결했다.
+- 학생 `오늘`, 부모 `안심`, 부모 `시험 준비안 확인`, 부모 `평시 루틴 만들기`는 실제 컴포넌트/상태/서버 action 흐름이 붙었다.
+- Vercel 배포 화면 대조는 2026-05-22에 진행했다. Playwright 390px 모바일 viewport 캡처는 `work/tmp/vercel-qa`에 저장되어 있다.
 - 로컬 390px 모바일 폭 스크린샷은 `work/tmp/visual-qa`에 저장했다.
 - 로컬 개발 서버는 `npm run dev -- --hostname 127.0.0.1 --port 3000` 방식으로 실행 가능하다.
+- Supabase 테스트 프로젝트는 생성됐고, read/write grant SQL을 사용자가 직접 실행했다.
+- `HARUNY_DATA_SOURCE=supabase`에서 학생 `오늘`과 부모 `안심`은 Supabase read path로 동작한다.
+- 시험 준비 생성과 평시 루틴 생성은 서버 action으로 Supabase upsert 저장 경계가 붙었고, 테스트 데이터 유지 재조회까지 확인했다.
 
 ## 구현된 큰 범위
 
@@ -51,22 +54,22 @@
 - 가족 설정 화면: 등교/하교, 학원, 식사, 취침 등 생활 리듬 설정.
 - 도메인 로직: 장기 계획, 하루 코치, 평시 루틴, 가족 시간 계산, 알림 정책.
 - 검증 문서: UX 품질 체크, 모바일 앱 전환 체크, MVP 검증 문서 작성.
+- Supabase 설계/연동: 테스트 DB 스키마 SQL, read/write grant SQL, mock/Supabase 전환 repository, 학생/부모 read path, 시험/루틴 write path.
 
 ## 다음 후보 작업
 
-- 사용자가 로컬에서 확정 시안 reference 화면 품질을 확인한다.
-- 확인 후 커밋/푸시 지시가 있으면 변경사항을 커밋하고 Vercel 배포 화면과 확정 시안을 대조한다.
+- 현재 Supabase 테스트 DB MVP 변경분을 커밋/푸시하고 Vercel 배포 상태를 확인한다.
+- Vercel preview/production 환경변수에 Supabase URL/publishable key와 `HARUNY_DATA_SOURCE` 적용 여부를 결정한다.
 - reference 화면 중 실제 입력/상태 변화가 필요한 화면은 승인된 시각 기준을 유지하면서 컴포넌트 구현으로 전환한다.
 - 긴 학생 이름, 긴 과목명, 긴 안내 문구가 카드와 버튼에서 깨지지 않는지 계속 확인한다.
 - 화면 간 진입 경로를 다시 확인하고 MVP 데모 동선을 정리.
-- Supabase 테스트 DB 기반 MVP 저장/조회 구조 설계.
 - 인증과 가족 초대 흐름 설계.
 - 실제 푸시 알림 연동 범위 결정.
 
 ## 후순위 보류 항목
 
 - 실제 푸시 알림 연동.
-- 실제 DB 저장.
+- 운영 DB 저장 구조 확정.
 - 실제 인증과 가족 초대.
 - 위치 추적.
 - 휴대폰 사용 시간 수집.

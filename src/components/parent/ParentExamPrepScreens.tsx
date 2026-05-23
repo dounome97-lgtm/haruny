@@ -101,8 +101,10 @@ export function ParentExamSubjectEntryScreen({
 }
 
 export function ParentExamPlanReviewScreen({
+  onStartAction,
   review,
 }: {
+  onStartAction?: () => Promise<void>;
   review: ParentExamPlanReviewView;
 }) {
   return (
@@ -152,7 +154,11 @@ export function ParentExamPlanReviewScreen({
         </div>
       </section>
 
-      <PrimaryLink href="/">이 준비안으로 시작</PrimaryLink>
+      {onStartAction ? (
+        <PrimaryFormAction action={onStartAction}>이 준비안으로 시작</PrimaryFormAction>
+      ) : (
+        <PrimaryLink href="/">이 준비안으로 시작</PrimaryLink>
+      )}
     </ParentPageFrame>
   );
 }
@@ -286,6 +292,25 @@ function PrimaryLink({ children, href }: { children: string; href: string }) {
     >
       {children}
     </Link>
+  );
+}
+
+function PrimaryFormAction({
+  action,
+  children,
+}: {
+  action: () => Promise<void>;
+  children: string;
+}) {
+  return (
+    <form action={action} className="mt-auto">
+      <button
+        className="flex min-h-16 w-full items-center justify-center rounded-[24px] bg-accent-strong px-5 text-xl font-bold text-white shadow-[0_12px_24px_rgba(242,87,69,0.22)]"
+        type="submit"
+      >
+        {children}
+      </button>
+    </form>
   );
 }
 
